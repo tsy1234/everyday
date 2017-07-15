@@ -1,0 +1,34 @@
+nav {
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+}
+nav #nav-title {
+  float: left;
+  width: 30%;
+  height: 48px;
+  line-height: 48px;
+}
+nav ul {
+  float: left;
+  height: 48px;
+  line-height: 48px;
+}
+nav ul .nav-tag {
+  float: left;
+  margin: 10px 0;
+  width: 80px;
+  text-align: center;
+  line-height: 28px;
+  border-left: solid #EBEBEB 1px;
+  transition: color .6s;
+  cursor: pointer;
+}
+nav ul .nav-tag:hover {
+  color: #3da8f5;
+}
+nav ul .nav-tag:last-child {
+  border-right: solid #EBEBEB 1px;
+}

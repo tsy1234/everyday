@@ -1,0 +1,48 @@
+@height: 48px;
+
+.float-left() {
+    float: left;
+}
+
+.box-sizing() {
+    box-sizing: border-box;
+}
+
+nav {
+    .box-sizing();
+    width: 100%;
+    height: @height;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+
+    #nav-title {
+        .float-left();
+        width: 30%;
+        height: @height;
+        line-height: @height;
+    }
+
+    ul {
+        .float-left();
+        height: @height;
+        line-height: @height;
+        .nav-tag {
+            .float-left();
+            margin: 10px 0;
+            width: 80px;
+            text-align: center;
+            line-height: @height - 20;
+            border-left: solid #EBEBEB 1px;
+            transition: color .6s;
+            cursor: pointer;
+
+            &:hover {
+                color: #3da8f5;
+            }
+
+            &:last-child {
+                border-right: solid #EBEBEB 1px;
+            }
+        }
+    }
+}
