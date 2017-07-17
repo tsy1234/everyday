@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Cover from './Cover';
 
@@ -21,7 +22,7 @@ class Nav extends React.Component {
                 {open: !prevState.open}
             ));
         } else {
-            axios.get('/back/getone/15079002208')
+            axios.get('/back/getmy')
                 .then((response) => {
                     this.setState({
                         achieves: response.data,
@@ -33,8 +34,10 @@ class Nav extends React.Component {
 
     render() {
         return (
-            <nav>
-                <span id="nav-title">EVERYDAY LEARNING</span>
+            <nav id="head">
+                <Link to="/">
+                    <span id="nav-title">EVERYDAY LEARNING</span>
+                </Link>
                 <ul>
                     <li className={this.state.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>
                 </ul>

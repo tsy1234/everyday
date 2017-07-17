@@ -42,13 +42,15 @@ const Person = mongoose.model('Person', personSchema);
  * @param {Function} fn - callback function  has an param as error
  */
 const checkLogin = (user, fn) => {
-    Person.findOne({personId: user.id}, 'personPass, name', (err, person) => {
+    Person.findOne({personId: user.id}, 'personPass name', (err, person) => {
         if (err) {
             console.log('find person error!!');
             fn(err);
         } else {
-            if (person && person.personPass === user.pass) {
+            if (person && (person.personPass === user.pass)) {
                 fn(null, person.name);
+            } else {
+                fn(null);
             }
         }
     });

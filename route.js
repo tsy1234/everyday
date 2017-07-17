@@ -4,7 +4,7 @@ const router = express.Router();
 const mainDir = require('./dir');
 const back = require('./back/back');
 
-router.get('/checklogin', (req, res) => {
+router.post('/checklogin', (req, res) => {
     var o = {
         id: req.body.id,
         pass: req.body.pass
@@ -13,11 +13,20 @@ router.get('/checklogin', (req, res) => {
     back.checkLogin(o, (err, name) => {
         if (err) {
             res.status('500').send('back end error');
+        } else if (!name) {
+            res.redirect('/login');
         } else {
             res.cookie('userId', o.id);
-            res.coolie('userName', name);
-            res.redirect(mainDir + '/index');
+            res.cookie('userName', name);
+            res.redirect('/index');
         }
+    });
+});
+
+router.get('/getmy', (req, res) => {
+    const id = req.cookies.userId;
+    back.getAchieved(id, (achieved) => {
+        res.send(achieved);
     });
 });
 
@@ -34,8 +43,8 @@ router.get('/getgroups', (req, res) => {
     });
 });
 
-router.get('/getmemeber/:groupName', (req, res) => {
-    const groupName = req.params.groupName;
+router.get('/getmembers/:groupName', (req, res) => {
+    const groupName = req.params.groupName.replace('_', ' ');
     back.getMembers(groupName, (members) => {
         res.send(members);
     });

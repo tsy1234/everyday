@@ -16,7 +16,7 @@ class Cover extends Component {
         return (
             <div className={this.props.open ? 'cover open' : 'cover'}>
                 <nav className="person-nav">
-                    <span>完成的事</span>
+                    <span>我完成的事</span>
                 </nav>
                 <div className="my-achieves">
                     {lists}

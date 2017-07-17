@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
 
 });
 
+app.get('/favicon.ico', (req, res) => {
+    res.end();
+});
+
 app.get('/index', (req, res) => {
     if (req.cookies.user) {
         res.sendFile(__dirname + '/index.html');
