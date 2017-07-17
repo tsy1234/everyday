@@ -137,13 +137,21 @@ nav ul .nav-tag:last-child {
     bottom: 0;
 }
 
-.my-achieves {
+.my-achieves,
+.group-details {
     width: 960px;
     height: 100%;
     margin: 0 auto;
     border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.0470588) 0px 2px 3px 0px;
+}
+
+.my-achieves {
     background-color: #fff;
+}
+
+.group-details {
+    background-color: #EEE;
 }
 
 .person-nav {
@@ -155,3 +163,4 @@ nav ul .nav-tag:last-child {
     border-bottom: solid 1px #F0F0F0;
     background-color: inherit;
 }
+

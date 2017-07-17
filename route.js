@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const mainDir = require('./dir');
 const back = require('./back/back');
 
 router.get('/checklogin', (req, res) => {
@@ -15,7 +16,7 @@ router.get('/checklogin', (req, res) => {
         } else {
             res.cookie('userId', o.id);
             res.coolie('userName', name);
-            res.redirect('/index');
+            res.redirect(mainDir + '/index');
         }
     });
 });

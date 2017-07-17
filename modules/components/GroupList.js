@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Group = ({name}) => (
-    <div className="group">
-		<h3>{ name }</h3>
-		<p>l love learning</p>
-	</div>
+const Group = ({name, path}) => (
+    <Link to={path}>
+        <div className="group">
+		    <h3>{ name }</h3>
+		    <p>l love learning</p>
+	    </div>
+    </Link>    
 );
 
-class Groups extends Component {
+class GroupList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,9 +28,13 @@ class Groups extends Component {
 
     render() {
         const array = this.state.achieves;
-        const groupList = array.map((group, index) => (
-            <Group key={group.name} name={group.name}/>
-        ));
+        const groupList = array.map((group, index) => {
+            const path = '/groups/' + group.name.replace(' ', '_');
+
+            return (
+                <Group key={group.name} name={group.name} path={path}/>
+            );
+        });
 
         return (
             <section id="group-list">
@@ -38,4 +45,4 @@ class Groups extends Component {
     }
 }
 
-export default Groups;
+export default GroupList;
