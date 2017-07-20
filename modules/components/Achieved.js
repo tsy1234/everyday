@@ -27,7 +27,7 @@ class Achieved extends Component {
         ));
 
         return (
-            <section>
+            <section id="other-achieves">
                 { lists }
             </section>
         );

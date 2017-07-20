@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const mainDir = require('./dir');
 const back = require('./back/back');
 
 router.post('/checklogin', (req, res) => {

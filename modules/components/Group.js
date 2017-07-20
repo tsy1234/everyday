@@ -22,16 +22,17 @@ class Group extends Component {
         const list = this.state.members.map((person, index) => {
             const path = '/other/' + person.personId;
             return (
-                <li key={person.personId}>
+                <li key={person.personId} className="one-member">
                     <Link to={path}>
-                        <span>{index}</span>
-                        <span>{person.personId}</span>
+                        <span className="member-num">{index + 1}</span>
+                        <span className="member-name">{person.personId}</span>
                     </Link>
                 </li>
             );
         });
+
         return (
-            <section>
+            <section id="group-wrap">
                 <nav className="group-nav">
                     <span>小组成员</span>
                 </nav>

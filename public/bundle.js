@@ -12045,7 +12045,7 @@ var Achieved = function (_Component) {
 
             return _react2.default.createElement(
                 'section',
-                null,
+                { id: 'other-achieves' },
                 lists
             );
         }
@@ -12118,26 +12118,27 @@ var Group = function (_Component) {
                 var path = '/other/' + person.personId;
                 return _react2.default.createElement(
                     'li',
-                    { key: person.personId },
+                    { key: person.personId, className: 'one-member' },
                     _react2.default.createElement(
                         _reactRouterDom.Link,
                         { to: path },
                         _react2.default.createElement(
                             'span',
-                            null,
+                            { className: 'member-num' },
                             index
                         ),
                         _react2.default.createElement(
                             'span',
-                            null,
+                            { className: 'member-name' },
                             person.personId
                         )
                     )
                 );
             });
+
             return _react2.default.createElement(
                 'section',
-                null,
+                { id: 'group-wrap' },
                 _react2.default.createElement(
                     'nav',
                     { className: 'group-nav' },

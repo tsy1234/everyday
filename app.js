@@ -23,7 +23,7 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.get('/index', (req, res) => {
-    if (req.cookies.user) {
+    if (req.cookies.userName) {
         res.sendFile(__dirname + '/index.html');
     } else {
         res.redirect('/login');
@@ -36,15 +36,6 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
     res.sendFile(__dirname + '/views/register.html');
-});
-
-app.post('/checklogin', (req, res) => {
-    if (req.body.id === 'taosiyu' && req.body.pass === 'taosiyu8888') {
-        res.cookie('user', req.body.user);
-        res.redirect('/index');
-    } else {
-        res.redirect('/login');
-    }
 });
 
 app.use('/back', router);
