@@ -4,30 +4,67 @@ import axios from 'axios';
 class Cover extends Component {
     constructor(props) {
         super();
+
         this.state = {
             show: false,
-            achieves: props.achieves
+            achieves: []
         };
+
         this.showAdd = this.showAdd.bind(this);
         this.addAchieve = this.addAchieve.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
-    addAchieve() {
-        const text = this.textInput.value.trim();
+    componentWillMount() {
+        axios.get('/back/getmy')
+            .then((response) => {
+                this.setState({
+                    achieves: response.data
+                });
+            });
+    }
 
-        axios.post('/back/addachieved', {
-            content: text
+    addAchieve(e) {
+        const content = this.textInput.value.trim();
+
+        if (e.keyCode === 13) {
+            if (content === '') {
+                return false;
+            }
+
+            const arr = this.state.achieves.slice();
+
+            const now = new Date();
+            const date = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
+
+            axios.post('/back/addachieved', {
+                content,
+                date
+            });
+
+            arr.push({content, date});
+
+            this.setState({
+                achieves: arr
+            });
+
+            this.textInput.value = '';
+        }
+        
+    }
+
+    handleBlur() {
+        this.setState({
+            show: false
         });
-
-
     }
 
     showAdd() {
-        this.setState((pre) => (
-            {
-                show: !pre.show
-            }
-        ));
+        this.setState({
+            show: true
+        });
+
+        this.textInput.focus();
     }
 
     render() {
@@ -51,9 +88,8 @@ class Cover extends Component {
                         <span className="icon-plus-sign"/>
                         <span>添加新事项</span>
                     </div>
-                    <div className={show ? 'add-form' : 'add-form hidden'}>
-                        <input type="text" ref={(input) => {this.textInput = input;}}/>
-                        <button className="btn-primary" onClick={this.addAchieve}>创建</button>
+                    <div className={show ? 'add-form' : 'add-form hide-form'} onBlur={this.handleBlur}>
+                        <input type="text" ref={(input) => {this.textInput = input;}} onKeyUp={this.addAchieve}/>
                     </div>
                 </div>
             </div>

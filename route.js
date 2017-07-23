@@ -51,12 +51,13 @@ router.get('/getmembers/:groupName', (req, res) => {
 
 router.post('/addachieved', (req, res) => {
     const content = req.body.content;
-    const now = new Date();
-    const date = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
+    const date = req.body.date;
+
     const o = {
         content: content,
         date: date
     };
+    
     back.insertAchieved(req.cookies.userId, o);
 });
 

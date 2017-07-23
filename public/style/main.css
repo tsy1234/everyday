@@ -242,7 +242,12 @@ nav ul .nav-tag:last-child {
 
 .add-form {
     display: block;
-    transition: display .4s ease;
+    margin-bottom: 50px;
+}
+
+.hide-form {
+    height: 0;
+    overflow: hidden;
 }
 
 .hidden {

@@ -12315,7 +12315,6 @@ var Nav = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
 
         _this.state = {
-            achieves: [],
             open: false
         };
 
@@ -12326,20 +12325,9 @@ var Nav = function (_React$Component) {
     _createClass(Nav, [{
         key: 'togglePerson',
         value: function togglePerson() {
-            var _this2 = this;
-
-            if (this.state.open) {
-                this.setState(function (prevState) {
-                    return { open: !prevState.open };
-                });
-            } else {
-                _axios2.default.get('/back/getmy').then(function (response) {
-                    _this2.setState({
-                        achieves: response.data,
-                        open: true
-                    });
-                });
-            }
+            this.setState(function (prevState) {
+                return { open: !prevState.open };
+            });
         }
     }, {
         key: 'render',
@@ -12365,7 +12353,7 @@ var Nav = function (_React$Component) {
                         '\u4E2A\u4EBA'
                     )
                 ),
-                _react2.default.createElement(_Cover2.default, { open: this.state.open, achieves: this.state.achieves })
+                _react2.default.createElement(_Cover2.default, { open: this.state.open })
             );
         }
     }]);
@@ -13289,42 +13277,84 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Cover = function (_Component) {
     _inherits(Cover, _Component);
 
-    function Cover() {
+    function Cover(props) {
         _classCallCheck(this, Cover);
 
         var _this = _possibleConstructorReturn(this, (Cover.__proto__ || Object.getPrototypeOf(Cover)).call(this));
 
         _this.state = {
-            show: false
+            show: false,
+            achieves: []
         };
+
         _this.showAdd = _this.showAdd.bind(_this);
         _this.addAchieve = _this.addAchieve.bind(_this);
+        _this.handleBlur = _this.handleBlur.bind(_this);
         return _this;
     }
 
     _createClass(Cover, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            _axios2.default.get('/back/getmy').then(function (response) {
+                _this2.setState({
+                    achieves: response.data
+                });
+            });
+        }
+    }, {
         key: 'addAchieve',
-        value: function addAchieve() {
-            var text = this.textInput.value.trim();
-            _axios2.default.post('/back/addachieved', {
-                content: text
+        value: function addAchieve(e) {
+            var content = this.textInput.value.trim();
+
+            if (e.keyCode === 13) {
+                if (content === '') {
+                    return false;
+                }
+
+                var arr = this.state.achieves.slice();
+
+                var now = new Date();
+                var date = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+
+                _axios2.default.post('/back/addachieved', {
+                    content: content,
+                    date: date
+                });
+
+                arr.push({ content: content, date: date });
+
+                this.setState({
+                    achieves: arr
+                });
+
+                this.textInput.value = '';
+            }
+        }
+    }, {
+        key: 'handleBlur',
+        value: function handleBlur() {
+            this.setState({
+                show: false
             });
         }
     }, {
         key: 'showAdd',
         value: function showAdd() {
-            this.setState(function (pre) {
-                return {
-                    show: !pre.show
-                };
+            this.setState({
+                show: true
             });
+
+            this.textInput.focus();
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
-            var lists = this.props.achieves.map(function (item, index) {
+            var lists = this.state.achieves.map(function (item, index) {
                 return _react2.default.createElement(
                     'div',
                     { key: index, className: 'time-line' },
@@ -13371,15 +13401,10 @@ var Cover = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: show ? 'add-form' : 'add-form hidden' },
+                        { className: show ? 'add-form' : 'add-form hide-form', onBlur: this.handleBlur },
                         _react2.default.createElement('input', { type: 'text', ref: function ref(input) {
-                                _this2.textInput = input;
-                            } }),
-                        _react2.default.createElement(
-                            'button',
-                            { className: 'btn-primary', onClick: this.addAchieve },
-                            '\u521B\u5EFA'
-                        )
+                                _this3.textInput = input;
+                            }, onKeyUp: this.addAchieve })
                     )
                 )
             );

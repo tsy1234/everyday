@@ -9,7 +9,6 @@ class Nav extends React.Component {
         super();
 
         this.state = {
-            achieves: [],
             open: false  
         };
 
@@ -17,19 +16,9 @@ class Nav extends React.Component {
     }
 
     togglePerson() {
-        if (this.state.open) {
-            this.setState((prevState) => (
-                {open: !prevState.open}
-            ));
-        } else {
-            axios.get('/back/getmy')
-                .then((response) => {
-                    this.setState({
-                        achieves: response.data,
-                        open: true
-                    });
-                });
-            }
+        this.setState((prevState) => (
+            {open: !prevState.open}
+        ));
     }
 
     render() {
@@ -41,7 +30,7 @@ class Nav extends React.Component {
                 <ul>
                     <li className={this.state.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>
                 </ul>
-                <Cover open={this.state.open} achieves={this.state.achieves}/>
+                <Cover open={this.state.open}/>
             </nav> 
         );
     }
