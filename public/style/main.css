@@ -13,6 +13,14 @@ a {
     text-decoration: none;
 }
 
+.btn-primary {
+    color: #FFF;
+    background-color: #3da8f5;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+}
+
 #head {
   box-sizing: border-box;
   width: 100%;
@@ -205,5 +213,39 @@ nav ul .nav-tag:last-child {
     border-radius: 100%;
     color: #fff;
     background-color: #7CCD7C;
+}
+
+.add-achieve {
+    margin: 0 20px;
+    padding: 20px 0 20px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.add-achieve:hover {
+    background-color: #EEE;
+}
+
+.add-achieve:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.add-achieve > span {
+    float: left;
+    margin-left: 10px;
+    font-size: 17px;
+    color: #3da8f5;
+}
+
+.add-form {
+    display: block;
+    transition: display .4s ease;
+}
+
+.hidden {
+    display: none;
 }
 

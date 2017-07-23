@@ -57,7 +57,7 @@ router.post('/addachieved', (req, res) => {
         content: content,
         date: date
     };
-    back.insertAchieved(req.cookies.user, o);
+    back.insertAchieved(req.cookies.userId, o);
 });
 
 module.exports = router;
