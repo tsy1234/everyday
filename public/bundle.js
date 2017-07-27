@@ -12353,7 +12353,7 @@ var Nav = function (_React$Component) {
                         '\u4E2A\u4EBA'
                     )
                 ),
-                _react2.default.createElement(_Cover2.default, { open: this.state.open })
+                _react2.default.createElement(_Cover2.default, { handleDelete: this.togglePerson, open: this.state.open })
             );
         }
     }]);
@@ -13383,7 +13383,8 @@ var Cover = function (_Component) {
                         'span',
                         null,
                         '\u6211\u5B8C\u6210\u7684\u4E8B'
-                    )
+                    ),
+                    _react2.default.createElement('span', { className: 'icon-remove-circle sy-icon-cover', onClick: this.props.handleDelete })
                 ),
                 _react2.default.createElement(
                     'div',

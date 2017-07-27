@@ -19,7 +19,7 @@ const personSchema = new Schema({
 const groupSchema = new Schema({
     name: String,
     introduce: String,
-    members: [{personId: String}]
+    members: [{personId: String, name: String}]
 }, {collection: 'groups'});
 
 personSchema.statics.addAchieved = function(personId, newA) {
@@ -96,6 +96,10 @@ const createGroup = (name, introduce) => {
     });
 };
 
+/**
+ * 
+ * @param {Function} fn - callback to deal with data
+ */
 const getGroups = (fn) => {
     Group.find({}, 'introduce name', (err, groups) => {
         if (err) {
@@ -139,10 +143,10 @@ const getAchieved = (personId, callback) => {
 /**
  * 
  * @param {String} groupName - the name of group to query
- * @param {String} id - the personId of joining person
+ * @param {Object} person - an object contains the id and name of joined person
  */
-const insertMember = (groupName, id) => {
-    Group.update({name: groupName}, {$push: {members: {personId: id}}}, (err, raw) => {
+const insertMember = (groupId, person) => {
+    Group.update({_id: groupId}, {$push: {members: {personId: person.personId, name: person.name}}}, (err, raw) => {
         if (err) {
             console.log('insert member error');
         }

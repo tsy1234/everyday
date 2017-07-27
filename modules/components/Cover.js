@@ -81,6 +81,7 @@ class Cover extends Component {
             <div className={this.props.open ? 'cover open' : 'cover'}>
                 <nav className="person-nav">
                     <span>我完成的事</span>
+                    <span className="icon-remove-circle sy-icon-cover" onClick={this.props.handleDelete}/>
                 </nav>
                 <div className="my-achieves">
                     { lists }

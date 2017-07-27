@@ -188,9 +188,32 @@ nav ul .nav-tag:last-child {
     background-color: inherit;
 }
 
+.person-nav .sy-icon-cover {
+    float: right;
+    width: 40px;
+    height: 48px;
+    margin-right: 50px;
+    font-weight: lighter;
+    line-height: 48px;
+    font-size: 27px;
+    color: #CCC;
+    transition: color .3s ease;
+    cursor: pointer;
+}
+
+.person-nav .sy-icon-cover:hover {
+    color: #000;
+}
+
 .one-member {
     display: block;
     padding: 10px 0 10px 0;
+    border-radius: 3px;
+    transition: transform .3s ease;
+}
+
+.one-member:hover {
+    transform: translateY(-5px);
 }
 
 .one-member:after {
@@ -216,8 +239,11 @@ nav ul .nav-tag:last-child {
 }
 
 .add-achieve {
-    margin: 0 20px;
-    padding: 20px 0 20px 10px;
+    display: inline-block;
+    margin: 20px;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    width: calc(100% - 40px);
     border-radius: 4px;
     cursor: pointer;
     transition: background-color .3s ease;

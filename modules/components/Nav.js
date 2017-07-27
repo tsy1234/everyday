@@ -30,7 +30,7 @@ class Nav extends React.Component {
                 <ul>
                     <li className={this.state.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>
                 </ul>
-                <Cover open={this.state.open}/>
+                <Cover handleDelete={this.togglePerson} open={this.state.open}/>
             </nav> 
         );
     }
