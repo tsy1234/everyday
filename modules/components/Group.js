@@ -8,10 +8,20 @@ class Group extends Component {
         this.state = {
             members: []
         };
+
+        this.addGroup = this.addGroup.bind(this);
+    }
+
+    addGroup() {
+        const groupName = this.groupName.replace('_', ' ');
+
+        axios.post('back/joingroup', {groupName});
     }
 
     componentWillMount() {
         const groupName = this.props.match.params.groupId;
+        this.groupName = groupName;
+
         axios.get('/back/getmembers/' + groupName)
             .then((response) => {
                 this.setState({members: response.data});
@@ -35,6 +45,7 @@ class Group extends Component {
             <section id="group-wrap">
                 <nav className="group-nav">
                     <span>小组成员</span>
+                    <span id="add-group" onClick={this.addGroup}>加入该小组</span>
                 </nav>
                 <div className="group-details">
                     <ul>

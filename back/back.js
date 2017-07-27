@@ -145,8 +145,8 @@ const getAchieved = (personId, callback) => {
  * @param {String} groupName - the name of group to query
  * @param {Object} person - an object contains the id and name of joined person
  */
-const insertMember = (groupId, person) => {
-    Group.update({_id: groupId}, {$push: {members: {personId: person.personId, name: person.name}}}, (err, raw) => {
+const insertMember = (groupName, person) => {
+    Group.update({name: groupName}, {$push: {members: {personId: person.personId, name: person.name}}}, (err, raw) => {
         if (err) {
             console.log('insert member error');
         }

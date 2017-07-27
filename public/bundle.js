@@ -12098,15 +12098,26 @@ var Group = function (_Component) {
         _this.state = {
             members: []
         };
+
+        _this.addGroup = _this.addGroup.bind(_this);
         return _this;
     }
 
     _createClass(Group, [{
+        key: 'addGroup',
+        value: function addGroup() {
+            var groupName = this.groupName.replace('_', ' ');
+
+            _axios2.default.post('back/joingroup', { groupName: groupName });
+        }
+    }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
             var _this2 = this;
 
             var groupName = this.props.match.params.groupId;
+            this.groupName = groupName;
+
             _axios2.default.get('/back/getmembers/' + groupName).then(function (response) {
                 _this2.setState({ members: response.data });
             });
@@ -12146,6 +12157,11 @@ var Group = function (_Component) {
                         'span',
                         null,
                         '\u5C0F\u7EC4\u6210\u5458'
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { id: 'add-group', onClick: this.addGroup },
+                        '\u52A0\u5165\u8BE5\u5C0F\u7EC4'
                     )
                 ),
                 _react2.default.createElement(

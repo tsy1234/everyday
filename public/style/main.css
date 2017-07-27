@@ -188,6 +188,23 @@ nav ul .nav-tag:last-child {
     background-color: inherit;
 }
 
+.group-nav > #add-group {
+    display: inline-block;
+    margin-left: 20px;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #7CCD7C;
+    transition: opacity .4s ease;
+    cursor: pointer;
+}
+
+#add-group:hover {
+    opacity: .6;
+}
+
 .person-nav .sy-icon-cover {
     float: right;
     width: 40px;

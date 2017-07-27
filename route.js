@@ -61,13 +61,13 @@ router.post('/addachieved', (req, res) => {
     back.insertAchieved(req.cookies.userId, o);
 });
 
-router.post('/insertgroup', (req, res) => {
+router.post('/joingroup', (req, res) => {
     const personId = req.cookies.userId;
     const name = req.cookies.userName;
 
-    const groupId = req.body.groupId;
+    const groupName = req.body.groupName;
 
-    back.insertMember(groupId, {personId, name});
+    back.insertMember(groupName, {personId, name});
 });
 
 module.exports = router;
