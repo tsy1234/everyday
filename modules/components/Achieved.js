@@ -14,7 +14,10 @@ class Achieved extends Component {
 
         axios.get(s)
             .then((response) => {
-                this.setState({achieves: response.data});
+                this.setState({
+                    achieves: response.data.achieved,
+                    name: response.data.name
+                });
             });
     }
 
@@ -26,9 +29,19 @@ class Achieved extends Component {
 		    </div>
         ));
 
+        const placeholder = (
+            <div className="no-placeholder">
+                <span className="icon-edit"/>
+                <p className="no-content">暂时没有完成事项</p>
+            </div>
+        );
+
+        const content = (lists.length > 0) ? lists : placeholder;
+
         return (
             <section id="other-achieves">
-                { lists }
+                <span id="achieves-source">{ this.state.name + '的完成事项' }</span>
+                { content }
             </section>
         );
     }

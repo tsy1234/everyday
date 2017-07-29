@@ -55,6 +55,15 @@ class Group extends Component {
         const join = <span id="add-group" onClick={this.addGroup}>加入该小组</span>;
         const isIn = <span id="in-group">已加入小组</span>;
 
+        const placeholder = (
+            <div className="no-placeholder">
+                <span className="icon-edit"/>
+                <p className="no-content">暂时没有成员加入</p>
+            </div>
+        );
+
+        const details = (list.length > 0) ? <ul>{list}</ul> : placeholder;
+
         return (
             <section id="group-wrap">
                 <nav className="group-nav">
@@ -62,9 +71,7 @@ class Group extends Component {
                     {this.state.isIn ? isIn : join}
                 </nav>
                 <div className="group-details">
-                    <ul>
-                        { list }
-                    </ul>
+                    { details }
                 </div> 
             </section>
         ); 

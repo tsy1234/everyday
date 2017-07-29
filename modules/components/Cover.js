@@ -19,7 +19,7 @@ class Cover extends Component {
         axios.get('/back/getmy')
             .then((response) => {
                 this.setState({
-                    achieves: response.data
+                    achieves: response.data.achieved
                 });
             });
     }

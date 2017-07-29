@@ -12020,7 +12020,10 @@ var Achieved = function (_Component) {
             var s = '/back/getone/' + this.props.match.params.personId;
 
             _axios2.default.get(s).then(function (response) {
-                _this2.setState({ achieves: response.data });
+                _this2.setState({
+                    achieves: response.data.achieved,
+                    name: response.data.name
+                });
             });
         }
     }, {
@@ -12043,10 +12046,28 @@ var Achieved = function (_Component) {
                 );
             });
 
+            var placeholder = _react2.default.createElement(
+                'div',
+                { className: 'no-placeholder' },
+                _react2.default.createElement('span', { className: 'icon-edit' }),
+                _react2.default.createElement(
+                    'p',
+                    { className: 'no-content' },
+                    '\u6682\u65F6\u6CA1\u6709\u5B8C\u6210\u4E8B\u9879'
+                )
+            );
+
+            var content = lists.length > 0 ? lists : placeholder;
+
             return _react2.default.createElement(
                 'section',
                 { id: 'other-achieves' },
-                lists
+                _react2.default.createElement(
+                    'span',
+                    { id: 'achieves-source' },
+                    this.state.name + '的完成事项'
+                ),
+                content
             );
         }
     }]);
@@ -12169,6 +12190,23 @@ var Group = function (_Component) {
                 '\u5DF2\u52A0\u5165\u5C0F\u7EC4'
             );
 
+            var placeholder = _react2.default.createElement(
+                'div',
+                { className: 'no-placeholder' },
+                _react2.default.createElement('span', { className: 'icon-edit' }),
+                _react2.default.createElement(
+                    'p',
+                    { className: 'no-content' },
+                    '\u6682\u65F6\u6CA1\u6709\u6210\u5458\u52A0\u5165'
+                )
+            );
+
+            var details = list.length > 0 ? _react2.default.createElement(
+                'ul',
+                null,
+                list
+            ) : placeholder;
+
             return _react2.default.createElement(
                 'section',
                 { id: 'group-wrap' },
@@ -12185,11 +12223,7 @@ var Group = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'group-details' },
-                    _react2.default.createElement(
-                        'ul',
-                        null,
-                        list
-                    )
+                    details
                 )
             );
         }
@@ -13343,7 +13377,7 @@ var Cover = function (_Component) {
 
             _axios2.default.get('/back/getmy').then(function (response) {
                 _this2.setState({
-                    achieves: response.data
+                    achieves: response.data.achieved
                 });
             });
         }

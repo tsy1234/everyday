@@ -132,11 +132,13 @@ const getMembers = (groupName, callback) => {
  * @param {Function} callback - function to call (pass person.achieved to it as a param)
  */
 const getAchieved = (personId, callback) => {
-    Person.findOne({personId: personId}, 'achieved', (err, person) => {
+    Person.findOne({personId: personId}, 'achieved name', (err, person) => {
         if (err) {
             console.log('get achieved error!!');
-        } else {    
-            callback(person.achieved);
+        } else {
+            const achieved = person.achieved;
+            const name = person.name;    
+            callback({achieved, name});
         }
     }); 
 };
