@@ -31,7 +31,9 @@ class Group extends Component {
         axios.post('/back/isingroup', {
             groupName: groupName.replace('_', ' ')
         }).then((response) => {
-            if (response.data === 'true') {
+            // console.log(response.data.toString());
+            if (response.data) {
+                 // console.log('coming');
                  this.setState({isIn: true});
             }
         });

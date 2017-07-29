@@ -12096,7 +12096,8 @@ var Group = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Group.__proto__ || Object.getPrototypeOf(Group)).call(this));
 
         _this.state = {
-            members: []
+            members: [],
+            isIn: false
         };
 
         _this.addGroup = _this.addGroup.bind(_this);
@@ -12107,7 +12108,7 @@ var Group = function (_Component) {
         key: 'addGroup',
         value: function addGroup() {
             var groupName = this.groupName.replace('_', ' ');
-
+            this.setState({ isIn: true });
             _axios2.default.post('back/joingroup', { groupName: groupName });
         }
     }, {
@@ -12125,7 +12126,11 @@ var Group = function (_Component) {
             _axios2.default.post('/back/isingroup', {
                 groupName: groupName.replace('_', ' ')
             }).then(function (response) {
-                _this2.isIn = response.data;
+                // console.log(response.data.toString());
+                if (response.data) {
+                    // console.log('coming');
+                    _this2.setState({ isIn: true });
+                }
             });
         }
     }, {
@@ -12175,7 +12180,7 @@ var Group = function (_Component) {
                         null,
                         '\u5C0F\u7EC4\u6210\u5458'
                     ),
-                    this.isIn ? isIn : join
+                    this.state.isIn ? isIn : join
                 ),
                 _react2.default.createElement(
                     'div',
