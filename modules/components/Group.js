@@ -46,7 +46,7 @@ class Group extends Component {
                 <li key={person.personId} className="one-member">
                     <Link to={path}>
                         <span className="member-num">{index + 1}</span>
-                        <span className="member-name">{person.personId}</span>
+                        <span className="member-name">{person.name}</span>
                     </Link>
                 </li>
             );

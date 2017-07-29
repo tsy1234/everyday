@@ -12152,7 +12152,7 @@ var Group = function (_Component) {
                         _react2.default.createElement(
                             'span',
                             { className: 'member-name' },
-                            person.personId
+                            person.name
                         )
                     )
                 );

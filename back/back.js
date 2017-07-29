@@ -187,6 +187,15 @@ const isInGrounp = (groupName, personId, cb) => {
     });
 };
 
+// Group.update({'name': 'front end', 'members.personId': '15079002208'}, {'$set': {
+//     'members.$.name': 'wanfengxiang'
+// }}, (err) => {
+//     if (err) {
+//         console.log('some err');
+//     } else
+//         console.log('success');
+// });
+
 exports.checkLogin = checkLogin;
 exports.createPerson = createPerson;
 exports.createGroup = createGroup;
