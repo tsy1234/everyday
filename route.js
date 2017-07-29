@@ -11,11 +11,27 @@ router.post('/checklogin', (req, res) => {
 
     back.checkLogin(o, (err, name) => {
         if (err) {
-            res.status('500').send('back end error');
+            res.status(500).send('back end error');
         } else if (!name) {
             res.redirect('/login');
         } else {
             res.cookie('userId', o.id);
+            res.cookie('userName', name);
+            res.redirect('/index');
+        }
+    });
+});
+
+router.post('/register', (req, res) => {
+    const name = req.body.username;
+    const id = req.body.userid;
+    const pass = req.body.pass;
+
+    back.createPerson({name, id, pass}, (err) => {
+        if (err) {
+            res.status(500).send('back end error');
+        } else {
+            res.cookie('userId', id);
             res.cookie('userName', name);
             res.redirect('/index');
         }

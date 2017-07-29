@@ -71,6 +71,7 @@ const createPerson = (newP, callback) => {
     person.save((err) => {
         if (err) {
             console.log('create person error!!');
+            callback(err);
         }
     });
 
@@ -185,8 +186,6 @@ const isInGrounp = (groupName, personId, cb) => {
         }
     });
 };
-
-
 
 exports.checkLogin = checkLogin;
 exports.createPerson = createPerson;

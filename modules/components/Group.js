@@ -6,7 +6,8 @@ class Group extends Component {
     constructor() {
         super();
         this.state = {
-            members: []
+            members: [],
+            isIn: false
         };
 
         this.addGroup = this.addGroup.bind(this);
@@ -14,7 +15,7 @@ class Group extends Component {
 
     addGroup() {
         const groupName = this.groupName.replace('_', ' ');
-
+        this.setState({isIn: true});
         axios.post('back/joingroup', {groupName});
     }
 
@@ -30,7 +31,9 @@ class Group extends Component {
         axios.post('/back/isingroup', {
             groupName: groupName.replace('_', ' ')
         }).then((response) => {
-            this.isIn = response.data;
+            if (response.data === 'true') {
+                 this.setState({isIn: true});
+            }
         });
     }
 
@@ -54,7 +57,7 @@ class Group extends Component {
             <section id="group-wrap">
                 <nav className="group-nav">
                     <span>小组成员</span>
-                    {this.isIn ? isIn : join}
+                    {this.state.isIn ? isIn : join}
                 </nav>
                 <div className="group-details">
                     <ul>
