@@ -166,6 +166,28 @@ const insertAchieved = (personId, newA) => {
     });
 };
 
+/**
+ * 
+ * @param {String} groupName - the name of group
+ * @param {String} personId - personId 
+ */
+const isInGrounp = (groupName, personId, cb) => {
+    Group.findOne({name: groupName, members: {$elemMatch: {personId: personId}}}, (err, user) => {
+        if (err) {
+            console.log('isInGroup Error');
+            return false;
+        }
+
+        if (user) {
+            cb('true');
+        } else {
+            cb('false');
+        }
+    });
+};
+
+
+
 exports.checkLogin = checkLogin;
 exports.createPerson = createPerson;
 exports.createGroup = createGroup;
@@ -174,5 +196,6 @@ exports.insertAchieved = insertAchieved;
 exports.insertMember = insertMember;
 exports.getAchieved = getAchieved;
 exports.getMembers = getMembers;
+exports.isInGrounp = isInGrounp;
 
 

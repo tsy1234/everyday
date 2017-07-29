@@ -70,4 +70,13 @@ router.post('/joingroup', (req, res) => {
     back.insertMember(groupName, {personId, name});
 });
 
+router.post('/isingroup', (req, res) => {
+    const personId = req.cookies.userId;
+    const groupName = req.body.groupName;
+
+    back.isInGrounp(groupName, personId, (isIn) => {
+        res.end(isIn);
+    });
+});
+
 module.exports = router;

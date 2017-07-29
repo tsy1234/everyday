@@ -13,6 +13,7 @@ class Nav extends React.Component {
         };
 
         this.togglePerson = this.togglePerson.bind(this);
+        this.handleMain = this.handleMain.bind(this);
     }
 
     togglePerson() {
@@ -21,11 +22,18 @@ class Nav extends React.Component {
         ));
     }
 
+    handleMain() {
+        var open = this.state.open;
+        if (open) {
+            this.setState({open: false});
+        }
+    }
+
     render() {
         return (
             <nav id="head">
                 <Link to="/">
-                    <span id="nav-title">EVERYDAY LEARNING</span>
+                    <span id="nav-title" onClick={this.handleMain}>EVERYDAY LEARNING</span>
                 </Link>
                 <ul>
                     <li className={this.state.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>

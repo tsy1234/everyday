@@ -12121,6 +12121,12 @@ var Group = function (_Component) {
             _axios2.default.get('/back/getmembers/' + groupName).then(function (response) {
                 _this2.setState({ members: response.data });
             });
+
+            _axios2.default.post('/back/isingroup', {
+                groupName: groupName.replace('_', ' ')
+            }).then(function (response) {
+                _this2.isIn = response.data;
+            });
         }
     }, {
         key: 'render',
@@ -12147,6 +12153,17 @@ var Group = function (_Component) {
                 );
             });
 
+            var join = _react2.default.createElement(
+                'span',
+                { id: 'add-group', onClick: this.addGroup },
+                '\u52A0\u5165\u8BE5\u5C0F\u7EC4'
+            );
+            var isIn = _react2.default.createElement(
+                'span',
+                { id: 'in-group' },
+                '\u5DF2\u52A0\u5165\u5C0F\u7EC4'
+            );
+
             return _react2.default.createElement(
                 'section',
                 { id: 'group-wrap' },
@@ -12158,11 +12175,7 @@ var Group = function (_Component) {
                         null,
                         '\u5C0F\u7EC4\u6210\u5458'
                     ),
-                    _react2.default.createElement(
-                        'span',
-                        { id: 'add-group', onClick: this.addGroup },
-                        '\u52A0\u5165\u8BE5\u5C0F\u7EC4'
-                    )
+                    this.isIn ? isIn : join
                 ),
                 _react2.default.createElement(
                     'div',
@@ -12335,6 +12348,7 @@ var Nav = function (_React$Component) {
         };
 
         _this.togglePerson = _this.togglePerson.bind(_this);
+        _this.handleMain = _this.handleMain.bind(_this);
         return _this;
     }
 
@@ -12344,6 +12358,14 @@ var Nav = function (_React$Component) {
             this.setState(function (prevState) {
                 return { open: !prevState.open };
             });
+        }
+    }, {
+        key: 'handleMain',
+        value: function handleMain() {
+            var open = this.state.open;
+            if (open) {
+                this.setState({ open: false });
+            }
         }
     }, {
         key: 'render',
@@ -12356,7 +12378,7 @@ var Nav = function (_React$Component) {
                     { to: '/' },
                     _react2.default.createElement(
                         'span',
-                        { id: 'nav-title' },
+                        { id: 'nav-title', onClick: this.handleMain },
                         'EVERYDAY LEARNING'
                     )
                 ),

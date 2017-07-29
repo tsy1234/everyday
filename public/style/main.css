@@ -188,7 +188,8 @@ nav ul .nav-tag:last-child {
     background-color: inherit;
 }
 
-.group-nav > #add-group {
+.group-nav > #add-group,
+.group-nav > #in-group {
     display: inline-block;
     margin-left: 20px;
     padding: 0 10px;
@@ -196,9 +197,16 @@ nav ul .nav-tag:last-child {
     line-height: 30px;
     border-radius: 5px;
     color: #fff;
+}
+
+#add-group {
     background-color: #7CCD7C;
     transition: opacity .4s ease;
     cursor: pointer;
+}
+
+#in-group {
+    background-color: #3da8f5;
 }
 
 #add-group:hover {

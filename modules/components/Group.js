@@ -26,6 +26,12 @@ class Group extends Component {
             .then((response) => {
                 this.setState({members: response.data});
             });
+
+        axios.post('/back/isingroup', {
+            groupName: groupName.replace('_', ' ')
+        }).then((response) => {
+            this.isIn = response.data;
+        });
     }
 
     render() {
@@ -41,11 +47,14 @@ class Group extends Component {
             );
         });
 
+        const join = <span id="add-group" onClick={this.addGroup}>加入该小组</span>;
+        const isIn = <span id="in-group">已加入小组</span>;
+
         return (
             <section id="group-wrap">
                 <nav className="group-nav">
                     <span>小组成员</span>
-                    <span id="add-group" onClick={this.addGroup}>加入该小组</span>
+                    {this.isIn ? isIn : join}
                 </nav>
                 <div className="group-details">
                     <ul>
