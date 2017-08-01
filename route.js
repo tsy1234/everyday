@@ -94,11 +94,19 @@ router.post('/joingroup', (req, res) => {
 });
 
 router.post('/isingroup', (req, res) => {
+    const personName = req.cookies.userName;
     const personId = req.cookies.userId;
     const groupName = req.body.groupName;
 
-    back.isInGrounp(groupName, personId, (isIn) => {
-        res.end(isIn);
+    back.isInGrounp(groupName, personId, (para) => {
+        const isIn = (para === 'false') ? false : true;
+
+        const result = {
+            isIn,
+            personId,
+            personName
+        };
+        res.end(JSON.stringify(result));
     });
 });
 

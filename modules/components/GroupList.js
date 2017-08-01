@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Group = ({name, path}) => (
+const Group = ({name, introduce, path}) => (
     <Link to={path}>
         <div className="group">
 		    <h3>{ name }</h3>
-		    <p>l love learning</p>
+		    <p>{ introduce }</p>
 	    </div>
     </Link>    
 );
@@ -16,7 +16,7 @@ class GroupList extends Component {
         super(props);
         this.state = {
             groups: [],
-            new: false
+            panel: false
         };
         this.test = 'this is a test';
 
@@ -42,22 +42,22 @@ class GroupList extends Component {
 
         axios.post('back/creategroup', {
             name, introduce
-        }).then((response) => {
-            const list = Array.prototype.slice.apply(this.state.groups)
-                        .push({name, introduce});
-            this.setState({
-                groups: list,
-                new: false
-            });
+        });
+
+        var list = this.state.groups.slice();
+        list.push({name, introduce});
+        this.setState({
+            panel: false,
+            groups: list
         });
     }
 
     showPanel() {
-        this.setState({new: true});
+        this.setState({panel: true});
     }
 
     hidePanel() {
-        this.setState({new: false});
+        this.setState({panel: false});
     }
 
     render() {
@@ -66,7 +66,7 @@ class GroupList extends Component {
             const path = '/groups/' + group.name.replace(' ', '_');
 
             return (
-                <Group key={group.name} name={group.name} path={path}/>
+                <Group key={group.name} name={group.name} introduce={group.introduce} path={path}/>
             );
         });
 
@@ -96,7 +96,7 @@ class GroupList extends Component {
                     <span className="icon-plus-sign"/>
                     <span>创建新小组</span>
                 </div>
-                {this.state.new ? cover : null}
+                {this.state.panel ? cover : null}
             </section>
         );
     }

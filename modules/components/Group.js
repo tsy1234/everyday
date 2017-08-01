@@ -15,7 +15,14 @@ class Group extends Component {
 
     addGroup() {
         const groupName = this.groupName.replace('_', ' ');
-        this.setState({isIn: true});
+        var list = this.state.members.slice();
+        list.push({name: this.personName, personId: this.personId});
+
+        this.setState({
+            isIn: true,
+            members: list
+        });
+
         axios.post('back/joingroup', {groupName});
     }
 
@@ -31,11 +38,15 @@ class Group extends Component {
         axios.post('/back/isingroup', {
             groupName: groupName.replace('_', ' ')
         }).then((response) => {
-            // console.log(response.data.toString());
-            if (response.data) {
-                 // console.log('coming');
+            const data = response.data;
+            console.log(data);
+
+            if (data.isIn) {
                  this.setState({isIn: true});
             }
+
+            this.personName = data.personName;
+            this.personId = data.personId;
         });
     }
 

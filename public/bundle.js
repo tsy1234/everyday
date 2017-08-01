@@ -12129,7 +12129,14 @@ var Group = function (_Component) {
         key: 'addGroup',
         value: function addGroup() {
             var groupName = this.groupName.replace('_', ' ');
-            this.setState({ isIn: true });
+            var list = this.state.members.slice();
+            list.push({ name: this.personName, personId: this.personId });
+
+            this.setState({
+                isIn: true,
+                members: list
+            });
+
             _axios2.default.post('back/joingroup', { groupName: groupName });
         }
     }, {
@@ -12147,11 +12154,15 @@ var Group = function (_Component) {
             _axios2.default.post('/back/isingroup', {
                 groupName: groupName.replace('_', ' ')
             }).then(function (response) {
-                // console.log(response.data.toString());
-                if (response.data) {
-                    // console.log('coming');
+                var data = response.data;
+                console.log(data);
+
+                if (data.isIn) {
                     _this2.setState({ isIn: true });
                 }
+
+                _this2.personName = data.personName;
+                _this2.personId = data.personId;
             });
         }
     }, {
@@ -12267,6 +12278,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Group = function Group(_ref) {
     var name = _ref.name,
+        introduce = _ref.introduce,
         path = _ref.path;
     return _react2.default.createElement(
         _reactRouterDom.Link,
@@ -12282,7 +12294,7 @@ var Group = function Group(_ref) {
             _react2.default.createElement(
                 'p',
                 null,
-                'l love learning'
+                introduce
             )
         )
     );
@@ -12298,7 +12310,7 @@ var GroupList = function (_Component) {
 
         _this.state = {
             groups: [],
-            new: false
+            panel: false
         };
         _this.test = 'this is a test';
 
@@ -12320,8 +12332,6 @@ var GroupList = function (_Component) {
     }, {
         key: 'newGroup',
         value: function newGroup() {
-            var _this3 = this;
-
             var name = this.groupName.value.trim();
             var introduce = this.groupIntroduce.value.trim();
 
@@ -12331,34 +12341,35 @@ var GroupList = function (_Component) {
 
             _axios2.default.post('back/creategroup', {
                 name: name, introduce: introduce
-            }).then(function (response) {
-                var list = Array.prototype.slice.apply(_this3.state.groups).push({ name: name, introduce: introduce });
-                _this3.setState({
-                    groups: list,
-                    new: false
-                });
+            });
+
+            var list = this.state.groups.slice();
+            list.push({ name: name, introduce: introduce });
+            this.setState({
+                panel: false,
+                groups: list
             });
         }
     }, {
         key: 'showPanel',
         value: function showPanel() {
-            this.setState({ new: true });
+            this.setState({ panel: true });
         }
     }, {
         key: 'hidePanel',
         value: function hidePanel() {
-            this.setState({ new: false });
+            this.setState({ panel: false });
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this4 = this;
+            var _this3 = this;
 
             var array = this.state.groups;
             var groupList = array.map(function (group, index) {
                 var path = '/groups/' + group.name.replace(' ', '_');
 
-                return _react2.default.createElement(Group, { key: group.name, name: group.name, path: path });
+                return _react2.default.createElement(Group, { key: group.name, name: group.name, introduce: group.introduce, path: path });
             });
 
             var cover = _react2.default.createElement(
@@ -12377,10 +12388,10 @@ var GroupList = function (_Component) {
                         'div',
                         { className: 'ed-form' },
                         _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u540D\u79F0', ref: function ref(input) {
-                                _this4.groupName = input;
+                                _this3.groupName = input;
                             } }),
                         _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u7B80\u4ECB (\u9009\u586B)', ref: function ref(input) {
-                                _this4.groupIntroduce = input;
+                                _this3.groupIntroduce = input;
                             } }),
                         _react2.default.createElement(
                             'button',
@@ -12410,7 +12421,7 @@ var GroupList = function (_Component) {
                         '\u521B\u5EFA\u65B0\u5C0F\u7EC4'
                     )
                 ),
-                this.state.new ? cover : null
+                this.state.panel ? cover : null
             );
         }
     }]);
