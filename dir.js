@@ -1,3 +1,9 @@
 const mainDir = __dirname;
 
-module.exports = mainDir;
+console.log(module.paths);
+const setName = function () {
+    console.log('hehe');
+};
+
+setName();
+exports.setName = setName;

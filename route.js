@@ -58,6 +58,13 @@ router.get('/getgroups', (req, res) => {
     });
 });
 
+router.post('/creategroup', (req, res) => {
+    const name = req.body.name;
+    const introduce = req.body.introduce;
+
+    back.createGroup(name, introduce);
+});
+
 router.get('/getmembers/:groupName', (req, res) => {
     const groupName = req.params.groupName.replace('_', ' ');
     back.getMembers(groupName, (members) => {

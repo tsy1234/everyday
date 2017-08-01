@@ -87,7 +87,7 @@ const createGroup = (name, introduce) => {
     const group = new Group({
         name: name,
         introduce: introduce,
-        members: [{personId: '15079002208'}]
+        members: []
     });
 
     group.save((err) => {
@@ -196,6 +196,14 @@ const isInGrounp = (groupName, personId, cb) => {
 //         console.log('some err');
 //     } else
 //         console.log('success');
+// });
+
+// Group.find(function (err, results) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(results);
+//     }
 // });
 
 exports.checkLogin = checkLogin;

@@ -12297,8 +12297,14 @@ var GroupList = function (_Component) {
         var _this = _possibleConstructorReturn(this, (GroupList.__proto__ || Object.getPrototypeOf(GroupList)).call(this, props));
 
         _this.state = {
-            achieves: []
+            groups: [],
+            new: false
         };
+        _this.test = 'this is a test';
+
+        _this.newGroup = _this.newGroup.bind(_this);
+        _this.showPanel = _this.showPanel.bind(_this);
+        _this.hidePanel = _this.hidePanel.bind(_this);
         return _this;
     }
 
@@ -12308,18 +12314,82 @@ var GroupList = function (_Component) {
             var _this2 = this;
 
             _axios2.default.get('/back/getgroups').then(function (response) {
-                _this2.setState({ achieves: response.data });
+                _this2.setState({ groups: response.data });
             });
+        }
+    }, {
+        key: 'newGroup',
+        value: function newGroup() {
+            var _this3 = this;
+
+            var name = this.groupName.value.trim();
+            var introduce = this.groupIntroduce.value.trim();
+
+            if (name === '') {
+                return false;
+            }
+
+            _axios2.default.post('back/creategroup', {
+                name: name, introduce: introduce
+            }).then(function (response) {
+                var list = Array.prototype.slice.apply(_this3.state.groups).push({ name: name, introduce: introduce });
+                _this3.setState({
+                    groups: list,
+                    new: false
+                });
+            });
+        }
+    }, {
+        key: 'showPanel',
+        value: function showPanel() {
+            this.setState({ new: true });
+        }
+    }, {
+        key: 'hidePanel',
+        value: function hidePanel() {
+            this.setState({ new: false });
         }
     }, {
         key: 'render',
         value: function render() {
-            var array = this.state.achieves;
+            var _this4 = this;
+
+            var array = this.state.groups;
             var groupList = array.map(function (group, index) {
                 var path = '/groups/' + group.name.replace(' ', '_');
 
                 return _react2.default.createElement(Group, { key: group.name, name: group.name, path: path });
             });
+
+            var cover = _react2.default.createElement(
+                'div',
+                { className: 'all-cover' },
+                _react2.default.createElement(
+                    'div',
+                    { id: 'group-panel' },
+                    _react2.default.createElement(
+                        'header',
+                        null,
+                        '\u521B\u5EFA\u9879\u76EE',
+                        _react2.default.createElement('span', { className: 'icon-remove', onClick: this.hidePanel })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'ed-form' },
+                        _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u540D\u79F0', ref: function ref(input) {
+                                _this4.groupName = input;
+                            } }),
+                        _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u7B80\u4ECB (\u9009\u586B)', ref: function ref(input) {
+                                _this4.groupIntroduce = input;
+                            } }),
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn-primary', onClick: this.newGroup },
+                            '\u5B8C\u6210\u5E76\u521B\u5EFA'
+                        )
+                    )
+                )
+            );
 
             return _react2.default.createElement(
                 'section',
@@ -12329,7 +12399,18 @@ var GroupList = function (_Component) {
                     null,
                     '\u5DF2\u521B\u7ACB\u7684\u5C0F\u7EC4'
                 ),
-                groupList
+                groupList,
+                _react2.default.createElement(
+                    'div',
+                    { id: 'new-group', onClick: this.showPanel },
+                    _react2.default.createElement('span', { className: 'icon-plus-sign' }),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        '\u521B\u5EFA\u65B0\u5C0F\u7EC4'
+                    )
+                ),
+                this.state.new ? cover : null
             );
         }
     }]);
