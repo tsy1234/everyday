@@ -39,7 +39,6 @@ class Group extends Component {
             groupName: groupName.replace('_', ' ')
         }).then((response) => {
             const data = response.data;
-            console.log(data);
 
             if (data.isIn) {
                  this.setState({isIn: true});

@@ -12155,7 +12155,6 @@ var Group = function (_Component) {
                 groupName: groupName.replace('_', ' ')
             }).then(function (response) {
                 var data = response.data;
-                console.log(data);
 
                 if (data.isIn) {
                     _this2.setState({ isIn: true });
@@ -12317,6 +12316,7 @@ var GroupList = function (_Component) {
         _this.newGroup = _this.newGroup.bind(_this);
         _this.showPanel = _this.showPanel.bind(_this);
         _this.hidePanel = _this.hidePanel.bind(_this);
+        _this.handleCover = _this.handleCover.bind(_this);
         return _this;
     }
 
@@ -12351,6 +12351,11 @@ var GroupList = function (_Component) {
             });
         }
     }, {
+        key: 'handleCover',
+        value: function handleCover() {
+            this.setState({ panel: false });
+        }
+    }, {
         key: 'showPanel',
         value: function showPanel() {
             this.setState({ panel: true });
@@ -12373,8 +12378,8 @@ var GroupList = function (_Component) {
             });
 
             var cover = _react2.default.createElement(
-                'div',
-                { className: 'all-cover' },
+                'section',
+                { id: 'cover-container' },
                 _react2.default.createElement(
                     'div',
                     { id: 'group-panel' },
@@ -12384,22 +12389,24 @@ var GroupList = function (_Component) {
                         '\u521B\u5EFA\u9879\u76EE',
                         _react2.default.createElement('span', { className: 'icon-remove', onClick: this.hidePanel })
                     ),
+                    _react2.default.createElement('div', { className: 'beauty-image' }),
                     _react2.default.createElement(
                         'div',
                         { className: 'ed-form' },
-                        _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u540D\u79F0', ref: function ref(input) {
+                        _react2.default.createElement('input', { className: 'sy-input', type: 'text', placeholder: '\u5C0F\u7EC4\u540D\u79F0', ref: function ref(input) {
                                 _this3.groupName = input;
                             } }),
-                        _react2.default.createElement('input', { type: 'text', placeholder: '\u5C0F\u7EC4\u7B80\u4ECB (\u9009\u586B)', ref: function ref(input) {
+                        _react2.default.createElement('input', { className: 'sy-input', type: 'text', placeholder: '\u5C0F\u7EC4\u7B80\u4ECB (\u9009\u586B)', ref: function ref(input) {
                                 _this3.groupIntroduce = input;
                             } }),
                         _react2.default.createElement(
                             'button',
-                            { className: 'btn-primary', onClick: this.newGroup },
+                            { className: 'sy-button btn', onClick: this.newGroup },
                             '\u5B8C\u6210\u5E76\u521B\u5EFA'
                         )
                     )
-                )
+                ),
+                _react2.default.createElement('div', { className: 'all-cover', onClick: this.handleCover })
             );
 
             return _react2.default.createElement(

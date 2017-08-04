@@ -23,6 +23,7 @@ class GroupList extends Component {
         this.newGroup = this.newGroup.bind(this);
         this.showPanel = this.showPanel.bind(this);
         this.hidePanel = this.hidePanel.bind(this);
+        this.handleCover = this.handleCover.bind(this);
     }
 
     componentWillMount() {
@@ -52,6 +53,10 @@ class GroupList extends Component {
         });
     }
 
+    handleCover() {
+        this.setState({panel: false});
+    }
+
     showPanel() {
         this.setState({panel: true});
     }
@@ -71,21 +76,23 @@ class GroupList extends Component {
         });
 
         const cover = (
-            <div className="all-cover">
+            <section id="cover-container"> 
                 <div id="group-panel">
                     <header>
                         创建项目
                         <span className="icon-remove" onClick={this.hidePanel}/>
                     </header>
+                    <div className="beauty-image"/>
                     <div className="ed-form">
-                        <input type="text" placeholder="小组名称" ref={(input) => {this.groupName = input;}}/>
-                        <input type="text" placeholder="小组简介 (选填)" ref={(input) => {this.groupIntroduce = input;}}/>
-                        <button className="btn-primary" onClick={this.newGroup}>
+                        <input className="sy-input" type="text" placeholder="小组名称" ref={(input) => {this.groupName = input;}}/>
+                        <input className="sy-input" type="text" placeholder="小组简介 (选填)" ref={(input) => {this.groupIntroduce = input;}}/>
+                        <button className="sy-button btn" onClick={this.newGroup}>
                             完成并创建
                         </button>
                     </div>
                 </div>        
-            </div>
+                <div className="all-cover" onClick={this.handleCover}/>
+            </section>
         );
 
         return (
