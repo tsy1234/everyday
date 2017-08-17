@@ -73,6 +73,19 @@ a {
     outline: 0;
 }
 
+#main-wrap {
+    position: relative;
+}
+
+#abs-wrap {
+    position: fixed;
+    top: 48px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+
 #head {
   box-sizing: border-box;
   width: 100%;
@@ -137,7 +150,7 @@ nav ul .nav-tag:last-child {
 
 .time-ill {
     position: absolute;
-    left: -6em;
+    left: -6em; 
     font-size: .8em;
 }
 
@@ -280,7 +293,7 @@ nav ul .nav-tag:last-child {
 	bottom: 100%;
 	width: 100%;
 	background-color: rgba(238, 238, 238, 0.96);
-	overflow: hidden;
+	overflow: auto;
     z-index: 999;
 	transition: bottom .4s ease;
 }
@@ -304,7 +317,7 @@ nav ul .nav-tag:last-child {
 }
 
 .my-achieves {
-    height: 100%;
+    min-height: 100%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.0470588) 0px 2px 3px 0px;
 }

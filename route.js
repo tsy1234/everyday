@@ -99,7 +99,7 @@ router.post('/isingroup', (req, res) => {
     const groupName = req.body.groupName;
 
     back.isInGrounp(groupName, personId, (para) => {
-        const isIn = (para === 'false') ? false : true;
+        const isIn = !(para === 'false');
 
         const result = {
             isIn,

@@ -13633,14 +13633,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     null,
     _react2.default.createElement(
         'div',
-        null,
+        { id: 'main-wrap' },
         _react2.default.createElement(_Nav2.default, null),
         _react2.default.createElement(
-            _reactRouterDom.Switch,
-            null,
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _GroupList2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/other/:personId', component: _Achieved2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', component: _Group2.default })
+            'div',
+            { id: 'abs-wrap' },
+            _react2.default.createElement(
+                _reactRouterDom.Switch,
+                null,
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _GroupList2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { path: '/other/:personId', component: _Achieved2.default }),
+                _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', component: _Group2.default })
+            )
         )
     )
 ), document.getElementById('app'));

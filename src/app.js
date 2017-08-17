@@ -10,13 +10,15 @@ import '../public/style/normalize.css';
 
 render(
      <HashRouter>
-        <div>
+        <div id="main-wrap">
             <Nav/>
-            <Switch>
-                <Route exact path="/" component={GroupList}/>
-                <Route path="/other/:personId" component={Achieved}/>
-                <Route path="/groups/:groupId" component={Group}/>
-            </Switch>
+            <div id="abs-wrap">
+                <Switch>
+                    <Route exact path="/" component={GroupList}/>
+                    <Route path="/other/:personId" component={Achieved}/>
+                    <Route path="/groups/:groupId" component={Group}/>
+                </Switch>
+            </div>
         </div>
      </HashRouter>,
     document.getElementById('app')
