@@ -158,6 +158,19 @@ const insertMember = (groupName, person) => {
 
 /**
  * 
+ * @param {String} groupName - the name of group to mutate
+ * @param {String} person - the id of dropped person
+ */
+const dropMember = (groupName, personId) => {
+    Group.update({name: groupName}, {$pull: {members: {personId: personId}}}, (err, raw) => {
+        if (err) {
+            console.log('insert member error');
+        }
+    });
+};
+
+/**
+ * 
  * @param {String} personId heihei
  * @param {object} newA - {content: String, date: String (maybe Date)}
  */
@@ -215,5 +228,6 @@ exports.insertMember = insertMember;
 exports.getAchieved = getAchieved;
 exports.getMembers = getMembers;
 exports.isInGrounp = isInGrounp;
+exports.dropMember = dropMember;
 
 

@@ -12122,6 +12122,7 @@ var Group = function (_Component) {
         };
 
         _this.addGroup = _this.addGroup.bind(_this);
+        _this.dropGroup = _this.dropGroup.bind(_this);
         return _this;
     }
 
@@ -12138,6 +12139,17 @@ var Group = function (_Component) {
             });
 
             _axios2.default.post('back/joingroup', { groupName: groupName });
+        }
+    }, {
+        key: 'dropGroup',
+        value: function dropGroup() {
+            var groupName = this.groupName.replace('_', ' ');
+
+            this.setState({
+                isIn: false
+            });
+
+            _axios2.default.post('back/dropgroup', { groupName: groupName });
         }
     }, {
         key: 'componentWillMount',
@@ -12196,8 +12208,8 @@ var Group = function (_Component) {
             );
             var isIn = _react2.default.createElement(
                 'span',
-                { id: 'in-group' },
-                '\u5DF2\u52A0\u5165\u5C0F\u7EC4'
+                { id: 'in-group', onClick: this.dropGroup },
+                '\u9000\u51FA\u8BE5\u5C0F\u7EC4'
             );
 
             var placeholder = _react2.default.createElement(

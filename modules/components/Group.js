@@ -11,6 +11,7 @@ class Group extends Component {
         };
 
         this.addGroup = this.addGroup.bind(this);
+        this.dropGroup = this.dropGroup.bind(this);
     }
 
     addGroup() {
@@ -24,6 +25,16 @@ class Group extends Component {
         });
 
         axios.post('back/joingroup', {groupName});
+    }
+
+    dropGroup() {
+        const groupName = this.groupName.replace('_', ' ');
+
+        this.setState({
+            isIn: false
+        });
+
+        axios.post('back/dropgroup', {groupName});
     }
 
     componentWillMount() {
@@ -63,7 +74,7 @@ class Group extends Component {
         });
 
         const join = <span id="add-group" onClick={this.addGroup}>加入该小组</span>;
-        const isIn = <span id="in-group">已加入小组</span>;
+        const isIn = <span id="in-group" onClick={this.dropGroup}>退出该小组</span>;
 
         const placeholder = (
             <div className="no-placeholder">

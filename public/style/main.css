@@ -412,8 +412,10 @@ nav ul .nav-tag:last-child {
 
 #in-group {
     background-color: #3da8f5;
+    cursor: pointer;
 }
 
+#in-group:hover,
 #add-group:hover {
     opacity: .6;
 }

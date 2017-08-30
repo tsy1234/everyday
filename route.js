@@ -84,6 +84,13 @@ router.post('/addachieved', (req, res) => {
     back.insertAchieved(req.cookies.userId, o);
 });
 
+router.post('/dropgroup', (req, res) => {
+    const personId = req.cookies.userId;
+    const groupName = req.body.groupName;
+
+    back.dropMember(groupName, personId);
+});
+
 router.post('/joingroup', (req, res) => {
     const personId = req.cookies.userId;
     const name = req.cookies.userName;
