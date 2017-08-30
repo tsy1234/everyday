@@ -12353,7 +12353,11 @@ var GroupList = function (_Component) {
     }, {
         key: 'handleCover',
         value: function handleCover() {
-            this.setState({ panel: false });
+            this.coverContainer.classList.add('cover-hide');
+            var self = this;
+            setTimeout(function () {
+                self.setState({ panel: false });
+            }, 500);
         }
     }, {
         key: 'showPanel',
@@ -12379,7 +12383,9 @@ var GroupList = function (_Component) {
 
             var cover = _react2.default.createElement(
                 'section',
-                { id: 'cover-container' },
+                { ref: function ref(ele) {
+                        _this3.coverContainer = ele;
+                    }, id: 'cover-container' },
                 _react2.default.createElement(
                     'div',
                     { id: 'group-panel' },

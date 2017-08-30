@@ -54,7 +54,11 @@ class GroupList extends Component {
     }
 
     handleCover() {
-        this.setState({panel: false});
+        this.coverContainer.classList.add('cover-hide');
+        var self = this;
+        setTimeout(function () {
+            self.setState({panel: false});
+        }, 500);
     }
 
     showPanel() {
@@ -76,7 +80,7 @@ class GroupList extends Component {
         });
 
         const cover = (
-            <section id="cover-container"> 
+            <section ref={(ele) => {this.coverContainer = ele;}} id="cover-container"> 
                 <div id="group-panel">
                     <header>
                         创建项目

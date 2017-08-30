@@ -22,6 +22,7 @@ a {
     padding: 8px 12px;
     margin: 10px auto;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .sy-input {
@@ -44,6 +45,46 @@ a {
     opacity: .8;
 }
 
+@-webkit-keyframes coverShow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes coverShow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes coverHide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes coverHide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .all-cover {
     position: absolute;
     bottom: 0;
@@ -53,6 +94,10 @@ a {
     background-color: #383838;
     opacity: .7;
     z-index: 333;
+}
+
+.cover-hide {
+    animation-name: coverHide !important;
 }
 
 .fade-in {
@@ -243,6 +288,9 @@ nav ul .nav-tag:last-child {
     top: 0;
     left: 0;
     right: 0;
+    animation-name: coverShow;
+    animation-duration: .5s;
+    animation-fill-mode: both;
 }
 
 #group-panel {
