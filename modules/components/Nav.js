@@ -30,6 +30,7 @@ class Nav extends React.Component {
     }
 
     render() {
+        const { myAchieves, getMyAchieves } = this.props;
         return (
             <nav id="head">
                 <Link to="/">
@@ -38,7 +39,10 @@ class Nav extends React.Component {
                 <ul>
                     <li className={this.state.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>
                 </ul>
-                <Cover handleDelete={this.togglePerson} open={this.state.open}/>
+                <Cover
+                    myAchieves={myAchieves} getMyAchieves={getMyAchieves}
+                    handleDelete={this.togglePerson} open={this.state.open}
+                />
             </nav> 
         );
     }

@@ -6,8 +6,7 @@ class Cover extends Component {
         super();
 
         this.state = {
-            show: false,
-            achieves: []
+            show: false
         };
 
         this.showAdd = this.showAdd.bind(this);
@@ -15,13 +14,8 @@ class Cover extends Component {
         this.handleBlur = this.handleBlur.bind(this);
     }
 
-    componentWillMount() {
-        axios.get('/back/getmy')
-            .then((response) => {
-                this.setState({
-                    achieves: response.data.achieved
-                });
-            });
+    componentDidMount () {
+        this.props.getMyAchieves();
     }
 
     addAchieve(e) {
@@ -68,7 +62,7 @@ class Cover extends Component {
     }
 
     render() {
-        const lists = this.state.achieves.map((item, index) => (
+        const lists = this.props.myAchieves.map((item, index) => (
             <div key={ index } className="time-line">
 			    <span className="time-ill">{ item.date }</span>
 			    <p>{ item.content }</p>

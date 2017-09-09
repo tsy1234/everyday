@@ -15,7 +15,6 @@ class GroupList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            groups: [],
             panel: false
         };
         this.test = 'this is a test';
@@ -24,13 +23,6 @@ class GroupList extends Component {
         this.showPanel = this.showPanel.bind(this);
         this.hidePanel = this.hidePanel.bind(this);
         this.handleCover = this.handleCover.bind(this);
-    }
-
-    componentWillMount() {
-        axios.get('/back/getgroups')
-            .then((response) => {
-                this.setState({groups: response.data});
-            });
     }
 
     newGroup() {
@@ -70,7 +62,7 @@ class GroupList extends Component {
     }
 
     render() {
-        const array = this.state.groups;
+        const array = this.props.groups;
         const groupList = array.map((group, index) => {
             const path = '/groups/' + group.name.replace(' ', '_');
 

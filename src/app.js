@@ -1,26 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom'; 
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux'; 
 
-import Nav from '../modules/components/Nav';
-import GroupList from '../modules/components/GroupList';
-import Group from '../modules/components/Group';
-import Achieved from '../modules/components/Achieved';
+import Root from '../modules/containers/Root';
+import configureStore from './configureStore';
+
 import '../public/style/normalize.css';
 
+const store = configureStore();
+
 render(
-     <HashRouter>
-        <div id="main-wrap">
-            <Nav/>
-            <div id="abs-wrap">
-                <Switch>
-                    <Route exact path="/" component={GroupList}/>
-                    <Route path="/other/:personId" component={Achieved}/>
-                    <Route path="/groups/:groupId" component={Group}/>
-                </Switch>
-            </div>
-        </div>
-     </HashRouter>,
+    <Provider store={store}>
+        <Root/>
+    </Provider>,    
     document.getElementById('app')
 );
 
