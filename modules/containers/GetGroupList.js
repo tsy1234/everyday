@@ -1,13 +1,27 @@
 import { connect } from 'react-redux';
 import GroupList from '../components/GroupList';
+import { setGroupPanel, addNewGroup } from '../action';
 
-var matStateToProps = (state) => {
+
+var mapStateToProps = (state) => {
     console.log('mapStateToProps', state.groupsList);
     return {
-        groups: state.groupsList
+        groups: state.groupsList,
+        panel: state.panel
     };
 };
 
-var GetGroupList = connect(matStateToProps)(GroupList);
+var mapDispatchToProps = (dispatch) => {
+    return {
+        openPanel: () => { dispatch(setGroupPanel(true)); },
+        closePanel: () => { dispatch(setGroupPanel(false)); },
+        addNewGroup: (obj) => { dispatch(addNewGroup(obj)); }
+    };
+};
+
+var GetGroupList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GroupList);
 
 export default GetGroupList;

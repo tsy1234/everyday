@@ -5,6 +5,8 @@ export const RECEIVE_GROUPS = 'RECEIVE_GROUPS';
 export const GET_MY_ACHIEVES = 'GET_MY_ACHIEVES';
 export const GET_MEMBER_ACHIEVES = 'GET_MEMBER_ACHIEVES';
 export const ADD_MY_ACHIEVES = 'ADD_MY_ACHIEVES';
+export const SET_GROUP_PANEL = 'SET_GROUP_PANEL';
+export const ADD_NEW_GROUP = 'ADD_NEW_GROUP';
 
 export function requestMain () {
     return (dispatch) => {
@@ -37,6 +39,20 @@ export function requestMyAchieves () {
             .then((response) => {
                 dispatch(getMyAchieves(response.data.achieved));
             });
+    };
+}
+
+export function addNewGroup (obj) {
+    return {
+        type: ADD_NEW_GROUP,
+        newGroup: obj
+    };
+}
+
+export function setGroupPanel (value) {
+    return {
+        type: SET_GROUP_PANEL,
+        value: value
     };
 }
 

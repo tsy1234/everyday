@@ -14,14 +14,8 @@ const Group = ({name, introduce, path}) => (
 class GroupList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            panel: false
-        };
-        this.test = 'this is a test';
 
         this.newGroup = this.newGroup.bind(this);
-        this.showPanel = this.showPanel.bind(this);
-        this.hidePanel = this.hidePanel.bind(this);
         this.handleCover = this.handleCover.bind(this);
     }
 
@@ -37,28 +31,16 @@ class GroupList extends Component {
             name, introduce
         });
 
-        var list = this.state.groups.slice();
-        list.push({name, introduce});
-        this.setState({
-            panel: false,
-            groups: list
-        });
+        this.props.addNewGroup({name, introduce});
+        this.handleCover();
     }
 
     handleCover() {
         this.coverContainer.classList.add('cover-hide');
         var self = this;
         setTimeout(function () {
-            self.setState({panel: false});
+            self.props.closePanel();
         }, 500);
-    }
-
-    showPanel() {
-        this.setState({panel: true});
-    }
-
-    hidePanel() {
-        this.setState({panel: false});
     }
 
     render() {
@@ -76,7 +58,7 @@ class GroupList extends Component {
                 <div id="group-panel">
                     <header>
                         创建项目
-                        <span className="icon-remove" onClick={this.hidePanel}/>
+                        <span className="icon-remove" onClick={this.handleCover}/>
                     </header>
                     <div className="beauty-image"/>
                     <div className="ed-form">
@@ -95,11 +77,11 @@ class GroupList extends Component {
             <section id="group-list">
                 <p>已创立的小组</p>
                 { groupList }
-                <div id="new-group" onClick={this.showPanel}>
+                <div id="new-group" onClick={this.props.openPanel}>
                     <span className="icon-plus-sign"/>
                     <span>创建新小组</span>
                 </div>
-                {this.state.panel ? cover : null}
+                {this.props.panel ? cover : null}
             </section>
         );
     }
