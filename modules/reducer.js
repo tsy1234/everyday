@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { 
     REQUEST_GROUPS, RECEIVE_GROUPS,
     GET_MY_ACHIEVES, SET_GROUP_PANEL,
-    ADD_NEW_GROUP
+    ADD_NEW_GROUP, SET_OPEN
 } from './action';
 
 function groupsList (state = [], action) {
@@ -11,6 +11,15 @@ function groupsList (state = [], action) {
             return action.groups;
         case ADD_NEW_GROUP:
             return [...state, action.newGroup];
+        default:
+            return state;
+    }
+}
+
+function myAchievesOpen (state = false, action) {
+    switch (action.type) {
+        case SET_OPEN:
+            return action.value;
         default:
             return state;
     }
@@ -57,6 +66,7 @@ function choosedMemberAchieves (state = [], action) {
 }
 
 const rootReducer = combineReducers({
+    myAchievesOpen,
     groupsList,
     panel,
     choosedGroup,

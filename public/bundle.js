@@ -4175,8 +4175,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.ADD_NEW_GROUP = exports.SET_GROUP_PANEL = exports.ADD_MY_ACHIEVES = exports.GET_MEMBER_ACHIEVES = exports.GET_MY_ACHIEVES = exports.RECEIVE_GROUPS = exports.REQUEST_GROUPS = undefined;
+exports.SET_OPEN = exports.ADD_NEW_GROUP = exports.SET_GROUP_PANEL = exports.ADD_MY_ACHIEVES = exports.GET_MEMBER_ACHIEVES = exports.GET_MY_ACHIEVES = exports.RECEIVE_GROUPS = exports.REQUEST_GROUPS = undefined;
 exports.requestMain = requestMain;
+exports.setOpen = setOpen;
 exports.requestMyAchieves = requestMyAchieves;
 exports.addNewGroup = addNewGroup;
 exports.setGroupPanel = setGroupPanel;
@@ -4194,6 +4195,7 @@ var GET_MEMBER_ACHIEVES = exports.GET_MEMBER_ACHIEVES = 'GET_MEMBER_ACHIEVES';
 var ADD_MY_ACHIEVES = exports.ADD_MY_ACHIEVES = 'ADD_MY_ACHIEVES';
 var SET_GROUP_PANEL = exports.SET_GROUP_PANEL = 'SET_GROUP_PANEL';
 var ADD_NEW_GROUP = exports.ADD_NEW_GROUP = 'ADD_NEW_GROUP';
+var SET_OPEN = exports.SET_OPEN = 'SET_OPEN';
 
 function requestMain() {
     return function (dispatch) {
@@ -4215,6 +4217,13 @@ function receiveGroups(groups) {
     return {
         type: RECEIVE_GROUPS,
         groups: groups
+    };
+}
+
+function setOpen(value) {
+    return {
+        type: SET_OPEN,
+        value: value
     };
 }
 
@@ -14232,7 +14241,7 @@ var Cover = function (_Component) {
                     return false;
                 }
 
-                var arr = this.state.achieves.slice();
+                var arr = this.props.myAchieves.slice();
 
                 var now = new Date();
                 var date = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
@@ -14242,11 +14251,10 @@ var Cover = function (_Component) {
                     date: date
                 });
 
-                arr.push({ content: content, date: date });
+                // arr.push({content, date});
 
-                this.setState({
-                    achieves: arr
-                });
+                // TODO
+                // bind to redux
 
                 this.textInput.value = '';
             }
@@ -14718,17 +14726,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Nav = function (_React$Component) {
-    _inherits(Nav, _React$Component);
+var Nav = function (_Component) {
+    _inherits(Nav, _Component);
 
     function Nav() {
         _classCallCheck(this, Nav);
 
         var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
-
-        _this.state = {
-            open: false
-        };
 
         _this.togglePerson = _this.togglePerson.bind(_this);
         _this.handleMain = _this.handleMain.bind(_this);
@@ -14738,24 +14742,31 @@ var Nav = function (_React$Component) {
     _createClass(Nav, [{
         key: 'togglePerson',
         value: function togglePerson() {
-            this.setState(function (prevState) {
-                return { open: !prevState.open };
-            });
+            var _props = this.props,
+                open = _props.open,
+                setOpen = _props.setOpen;
+
+            if (open) {
+                setOpen(false);
+            } else {
+                setOpen(true);
+            }
         }
     }, {
         key: 'handleMain',
         value: function handleMain() {
-            var open = this.state.open;
+            var open = this.props.open;
             if (open) {
-                this.setState({ open: false });
+                this.props.setOpen(false);
             }
         }
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props,
-                myAchieves = _props.myAchieves,
-                getMyAchieves = _props.getMyAchieves;
+            var _props2 = this.props,
+                myAchieves = _props2.myAchieves,
+                getMyAchieves = _props2.getMyAchieves,
+                setOpen = _props2.setOpen;
 
             return _react2.default.createElement(
                 'nav',
@@ -14774,20 +14785,22 @@ var Nav = function (_React$Component) {
                     null,
                     _react2.default.createElement(
                         'li',
-                        { className: this.state.open ? 'nav-tag nav-open' : 'nav-tag', onClick: this.togglePerson },
+                        { className: this.props.open ? 'nav-tag nav-open' : 'nav-tag', onClick: this.togglePerson },
                         '\u4E2A\u4EBA'
                     )
                 ),
                 _react2.default.createElement(_Cover2.default, {
                     myAchieves: myAchieves, getMyAchieves: getMyAchieves,
-                    handleDelete: this.togglePerson, open: this.state.open
+                    handleDelete: function handleDelete() {
+                        setOpen(false);
+                    }, open: this.props.open
                 })
             );
         }
     }]);
 
     return Nav;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = Nav;
 
@@ -14861,7 +14874,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
     return {
-        myAchieves: state.myAchieves
+        myAchieves: state.myAchieves,
+        open: state.myAchievesOpen
     };
 };
 
@@ -14869,6 +14883,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         getMyAchieves: function getMyAchieves() {
             dispatch((0, _action.requestMyAchieves)());
+        },
+        setOpen: function setOpen(value) {
+            dispatch((0, _action.setOpen)(value));
         }
     };
 };
@@ -14903,6 +14920,18 @@ function groupsList() {
             return action.groups;
         case _action.ADD_NEW_GROUP:
             return [].concat(_toConsumableArray(state), [action.newGroup]);
+        default:
+            return state;
+    }
+}
+
+function myAchievesOpen() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _action.SET_OPEN:
+            return action.value;
         default:
             return state;
     }
@@ -14964,6 +14993,7 @@ function choosedMemberAchieves() {
 }
 
 var rootReducer = (0, _redux.combineReducers)({
+    myAchievesOpen: myAchievesOpen,
     groupsList: groupsList,
     panel: panel,
     choosedGroup: choosedGroup,

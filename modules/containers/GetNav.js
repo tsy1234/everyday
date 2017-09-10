@@ -1,17 +1,19 @@
 import Nav from '../components/Nav';
 import { connect } from 'react-redux';
-import { requestMyAchieves } from '../action';
+import { requestMyAchieves, setOpen } from '../action';
 
 
 const mapStateToProps = (state) => {
     return {
-        myAchieves: state.myAchieves
+        myAchieves: state.myAchieves,
+        open: state.myAchievesOpen
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMyAchieves: () => { dispatch(requestMyAchieves()); }
+        getMyAchieves: () => { dispatch(requestMyAchieves()); },
+        setOpen: (value) => { dispatch(setOpen(value));}
     };
 };
 

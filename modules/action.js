@@ -7,6 +7,7 @@ export const GET_MEMBER_ACHIEVES = 'GET_MEMBER_ACHIEVES';
 export const ADD_MY_ACHIEVES = 'ADD_MY_ACHIEVES';
 export const SET_GROUP_PANEL = 'SET_GROUP_PANEL';
 export const ADD_NEW_GROUP = 'ADD_NEW_GROUP';
+export const SET_OPEN = 'SET_OPEN';
 
 export function requestMain () {
     return (dispatch) => {
@@ -29,6 +30,13 @@ function receiveGroups (groups) {
     return {
         type: RECEIVE_GROUPS,
         groups: groups
+    };
+}
+
+export function setOpen (value) {
+    return {
+        type: SET_OPEN,
+        value: value
     };
 }
 

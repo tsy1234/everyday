@@ -205,12 +205,17 @@ nav ul .nav-tag:last-child {
     max-width: 1240px;
 }
 
+#group-list::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
 #group-list > p {
     padding-bottom: 20px;
 }
 
 #group-list > a {
-    display: block;
     box-sizing: border-box;
 }
 

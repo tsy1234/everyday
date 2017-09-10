@@ -26,7 +26,7 @@ class Cover extends Component {
                 return false;
             }
 
-            const arr = this.state.achieves.slice();
+            const arr = this.props.myAchieves.slice();
 
             const now = new Date();
             const date = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
@@ -36,11 +36,10 @@ class Cover extends Component {
                 date
             });
 
-            arr.push({content, date});
+            // arr.push({content, date});
 
-            this.setState({
-                achieves: arr
-            });
+            // TODO
+            // bind to redux
 
             this.textInput.value = '';
         }
