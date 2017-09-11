@@ -29,7 +29,7 @@ class Nav extends Component {
     }
 
     render() {
-        const { myAchieves, getMyAchieves, setOpen } = this.props;
+        const { myAchieves, getMyAchieves, setOpen, addMyAchieve } = this.props;
         return (
             <nav id="head">
                 <Link to="/">
@@ -39,6 +39,7 @@ class Nav extends Component {
                     <li className={this.props.open ? 'nav-tag nav-open' : 'nav-tag'} onClick={this.togglePerson}>个人</li>
                 </ul>
                 <Cover
+                    addMyAchieve={addMyAchieve}
                     myAchieves={myAchieves} getMyAchieves={getMyAchieves}
                     handleDelete={() => {setOpen(false);}} open={this.props.open}
                 />

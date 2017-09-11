@@ -50,6 +50,13 @@ export function requestMyAchieves () {
     };
 }
 
+export function addAchieve (obj) {
+    return {
+        type: ADD_MY_ACHIEVES,
+        newAchieve: obj
+    };
+}
+
 export function addNewGroup (obj) {
     return {
         type: ADD_NEW_GROUP,
@@ -70,14 +77,4 @@ function getMyAchieves (myAchieves) {
         myAchieves: myAchieves
     };
 }
-
-// export function requestMemberAchieves () {
-//     return (dispatch) => {
-//         return 
-//     }
-// }
-
-// function getMemberAchieves () {
-
-// }
 

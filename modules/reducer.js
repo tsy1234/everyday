@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { 
     REQUEST_GROUPS, RECEIVE_GROUPS,
     GET_MY_ACHIEVES, SET_GROUP_PANEL,
+    ADD_MY_ACHIEVES,
     ADD_NEW_GROUP, SET_OPEN
 } from './action';
 
@@ -52,7 +53,8 @@ function myAchieves (state = [], action) {
     switch (action.type) {
         case GET_MY_ACHIEVES:
             return action.myAchieves;
-
+        case ADD_MY_ACHIEVES:
+            return [...state, action.newAchieve];
         default:
             return state;
     }
