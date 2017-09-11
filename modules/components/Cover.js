@@ -5,9 +5,7 @@ class Cover extends Component {
     constructor(props) {
         super();
 
-        this.state = {
-            show: false
-        };
+        this.state = { show: false };
 
         this.showAdd = this.showAdd.bind(this);
         this.addAchieve = this.addAchieve.bind(this);
@@ -27,7 +25,7 @@ class Cover extends Component {
             }
 
             const now = new Date();
-            const date = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
+            const date = `${ now.getFullYear() }.${ now.getMonth() + 1 }.${ now.getDate() }`;
 
             axios.post('/back/addachieved', {
                 content,
@@ -36,22 +34,17 @@ class Cover extends Component {
 
             this.props.addMyAchieve({content, date});
             this.textInput.value = '';
-            this.setState({show: false});
+            this.setState({ show: false });
         }
         
     }
 
     handleBlur() {
-        this.setState({
-            show: false
-        });
+        this.setState({ show: false });
     }
 
     showAdd() {
-        this.setState({
-            show: true
-        });
-
+        this.setState({ show: true });
         this.textInput.focus();
     }
 

@@ -17,24 +17,22 @@ class Group extends Component {
     addGroup() {
         const groupName = this.groupName.replace('_', ' ');
         var list = this.state.members.slice();
-        list.push({name: this.personName, personId: this.personId});
+        list.push({ name: this.personName, personId: this.personId });
 
         this.setState({
             isIn: true,
             members: list
         });
 
-        axios.post('back/joingroup', {groupName});
+        axios.post('back/joingroup', { groupName });
     }
 
     dropGroup() {
         const groupName = this.groupName.replace('_', ' ');
 
-        this.setState({
-            isIn: false
-        });
+        this.setState({ isIn: false });
 
-        axios.post('back/dropgroup', {groupName});
+        axios.post('back/dropgroup', { groupName });
     }
 
     componentWillMount() {
@@ -43,7 +41,7 @@ class Group extends Component {
 
         axios.get('/back/getmembers/' + groupName)
             .then((response) => {
-                this.setState({members: response.data});
+                this.setState({ members: response.data });
             });
 
         axios.post('/back/isingroup', {
@@ -52,7 +50,7 @@ class Group extends Component {
             const data = response.data;
 
             if (data.isIn) {
-                 this.setState({isIn: true});
+                 this.setState({ isIn: true });
             }
 
             this.personName = data.personName;
@@ -64,17 +62,17 @@ class Group extends Component {
         const list = this.state.members.map((person, index) => {
             const path = '/other/' + person.personId;
             return (
-                <li key={person.personId} className="one-member">
-                    <Link to={path}>
-                        <span className="member-num">{index + 1}</span>
-                        <span className="member-name">{person.name}</span>
+                <li key={ person.personId } className="one-member">
+                    <Link to={ path }>
+                        <span className="member-num">{ index + 1 }</span>
+                        <span className="member-name">{ person.name }</span>
                     </Link>
                 </li>
             );
         });
 
-        const join = <span id="add-group" onClick={this.addGroup}>加入该小组</span>;
-        const isIn = <span id="in-group" onClick={this.dropGroup}>退出该小组</span>;
+        const join = <span id="add-group" onClick={ this.addGroup }>加入该小组</span>;
+        const isIn = <span id="in-group" onClick={ this.dropGroup }>退出该小组</span>;
 
         const placeholder = (
             <div className="no-placeholder">
@@ -83,13 +81,13 @@ class Group extends Component {
             </div>
         );
 
-        const details = (list.length > 0) ? <ul>{list}</ul> : placeholder;
+        const details = (list.length > 0) ? <ul>{ list }</ul> : placeholder;
 
         return (
             <section id="group-wrap">
                 <nav className="group-nav">
                     <span>小组成员</span>
-                    {this.state.isIn ? isIn : join}
+                    { this.state.isIn ? isIn : join }
                 </nav>
                 <div className="group-details">
                     { details }

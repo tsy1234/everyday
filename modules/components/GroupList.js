@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Group = ({name, introduce, path}) => (
-    <Link to={path}>
+const Group = ({ name, introduce, path }) => (
+    <Link to={ path }>
         <div className="group">
 		    <h3>{ name }</h3>
 		    <p>{ introduce }</p>
@@ -31,7 +31,7 @@ class GroupList extends Component {
             name, introduce
         });
 
-        this.props.addNewGroup({name, introduce});
+        this.props.addNewGroup({ name, introduce });
         this.handleCover();
     }
 
@@ -47,29 +47,28 @@ class GroupList extends Component {
         const array = this.props.groups;
         const groupList = array.map((group, index) => {
             const path = '/groups/' + group.name.replace(' ', '_');
-
             return (
-                <Group key={group.name} name={group.name} introduce={group.introduce} path={path}/>
+                <Group key={ group.name } name={ group.name } introduce={ group.introduce } path={ path }/>
             );
         });
 
         const cover = (
-            <section ref={(ele) => {this.coverContainer = ele;}} id="cover-container"> 
+            <section ref={ (ele) => { this.coverContainer = ele; } } id="cover-container"> 
                 <div id="group-panel">
                     <header>
                         创建项目
-                        <span className="icon-remove" onClick={this.handleCover}/>
+                        <span className="icon-remove" onClick={ this.handleCover }/>
                     </header>
                     <div className="beauty-image"/>
                     <div className="ed-form">
-                        <input className="sy-input" type="text" placeholder="小组名称" ref={(input) => {this.groupName = input;}}/>
-                        <input className="sy-input" type="text" placeholder="小组简介 (选填)" ref={(input) => {this.groupIntroduce = input;}}/>
-                        <button className="sy-button btn" onClick={this.newGroup}>
+                        <input className="sy-input" type="text" placeholder="小组名称" ref={ (input) => { this.groupName = input; } }/>
+                        <input className="sy-input" type="text" placeholder="小组简介 (选填)" ref={ (input) => { this.groupIntroduce = input; } }/>
+                        <button className="sy-button btn" onClick={ this.newGroup }>
                             完成并创建
                         </button>
                     </div>
                 </div>        
-                <div className="all-cover" onClick={this.handleCover}/>
+                <div className="all-cover" onClick={ this.handleCover }/>
             </section>
         );
 
@@ -77,11 +76,11 @@ class GroupList extends Component {
             <section id="group-list">
                 <p>已创立的小组</p>
                 { groupList }
-                <div id="new-group" onClick={this.props.openPanel}>
+                <div id="new-group" onClick={ this.props.openPanel }>
                     <span className="icon-plus-sign"/>
                     <span>创建新小组</span>
                 </div>
-                {this.props.panel ? cover : null}
+                { this.props.panel ? cover : null }
             </section>
         );
     }

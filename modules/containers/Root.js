@@ -26,9 +26,9 @@ class Root extends Component {
                     <GetNav/>
                     <div id="abs-wrap">
                         <Switch>
-                            <Route exact path="/" component={GetGroupList}/>
-                            <Route path="/other/:personId" component={Achieved}/>
-                            <Route path="/groups/:groupId" component={Group}/>
+                            <Route exact path="/" component={ GetGroupList }/>
+                            <Route path="/other/:personId" component={ Achieved }/>
+                            <Route path="/groups/:groupId" component={ Group }/>
                         </Switch>                    
                     </div> 
                 </div>

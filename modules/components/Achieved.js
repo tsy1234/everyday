@@ -4,9 +4,7 @@ import axios from 'axios';
 class Achieved extends Component {
     constructor() {
         super();
-        this.state = {
-            achieves: []
-        };
+        this.state = { achieves: [] };
     }
 
     componentWillMount() {
