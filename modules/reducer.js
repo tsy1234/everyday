@@ -6,7 +6,7 @@ import {
     ADD_NEW_GROUP, SET_OPEN
 } from './action';
 
-function groupsList (state = [], action) {
+function groupsList (state = [{name: 'front-paap', introduce: 'meiyou'}], action) {
     switch (action.type) {
         case RECEIVE_GROUPS:
             return action.groups;

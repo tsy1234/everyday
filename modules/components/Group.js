@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 class Group extends Component {
     constructor() {
         super();
+        
         this.state = {
             members: [],
             isIn: false
@@ -12,6 +13,7 @@ class Group extends Component {
 
         this.addGroup = this.addGroup.bind(this);
         this.dropGroup = this.dropGroup.bind(this);
+        this.toggleSet = this.toggleSet.bind(this);
     }
 
     addGroup() {
@@ -33,6 +35,10 @@ class Group extends Component {
         this.setState({ isIn: false });
 
         axios.post('back/dropgroup', { groupName });
+    }
+
+    toggleSet () {
+        this.setPanel.classList.toggle('hidden');
     }
 
     componentWillMount() {
@@ -88,6 +94,15 @@ class Group extends Component {
                 <nav className="group-nav">
                     <span>小组成员</span>
                     { this.state.isIn ? isIn : join }
+                    <span className="icon-cog group-set"
+                          onClick={ this.toggleSet }
+                    />
+                    <ul className="group-set-panel hidden"
+                        ref={ (set) => { this.setPanel = set; } }
+                    >
+                        <li>删除小组</li>
+                        <li>别的</li>
+                    </ul>
                 </nav>
                 <div className="group-details">
                     { details }
