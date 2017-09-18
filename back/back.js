@@ -164,7 +164,7 @@ const insertMember = (groupName, person) => {
 const dropMember = (groupName, personId) => {
     Group.update({name: groupName}, {$pull: {members: {personId: personId}}}, (err, raw) => {
         if (err) {
-            console.log('insert member error');
+            console.log('drop member error');
         }
     });
 };
@@ -177,7 +177,7 @@ const dropMember = (groupName, personId) => {
 const insertAchieved = (personId, newA) => {
     Person.update({personId: personId}, {$push: {achieved: newA}}, (err, raw) => {
         if (err) {
-            console.log('insert error');
+            console.log('insert achieved error');
         } 
     });
 };
@@ -198,6 +198,14 @@ const isInGrounp = (groupName, personId, cb) => {
             cb('true');
         } else {
             cb('false');
+        }
+    });
+};
+
+const delGroup = (groupName) => {
+    Group.remove({ name: groupName }, function (err) {
+        if (err) {
+            console.log('delGroup error');
         }
     });
 };
@@ -229,5 +237,5 @@ exports.getAchieved = getAchieved;
 exports.getMembers = getMembers;
 exports.isInGrounp = isInGrounp;
 exports.dropMember = dropMember;
-
+exports.delGroup = delGroup;
 

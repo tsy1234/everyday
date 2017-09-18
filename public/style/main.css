@@ -334,12 +334,16 @@ nav ul .nav-tag:last-child {
     font-size: 17px;
 }
 
+.cover-normal,
 #cover-container {
     position: fixed;
     bottom: 0;
     top: 0;
     left: 0;
     right: 0;
+}
+
+#cover-container {
     animation-name: coverShow;
     animation-duration: .5s;
     animation-fill-mode: both;

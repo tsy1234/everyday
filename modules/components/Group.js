@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Group extends Component {
     constructor() {
@@ -14,6 +14,7 @@ class Group extends Component {
         this.addGroup = this.addGroup.bind(this);
         this.dropGroup = this.dropGroup.bind(this);
         this.toggleSet = this.toggleSet.bind(this);
+        this.delGroup = this.delGroup.bind(this);
     }
 
     addGroup() {
@@ -23,7 +24,8 @@ class Group extends Component {
 
         this.setState({
             isIn: true,
-            members: list
+            members: list,
+            redirect: false
         });
 
         axios.post('back/joingroup', { groupName });
@@ -39,6 +41,12 @@ class Group extends Component {
 
     toggleSet () {
         this.setPanel.classList.toggle('hidden');
+    }
+
+    delGroup () {
+        const groupName = this.groupName.replace('_', ' ');
+        axios.post('back/delgroup', { groupName });
+        this.setState({ redirect: true });
     }
 
     componentWillMount() {
@@ -65,6 +73,10 @@ class Group extends Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to="/"/>;
+        }
+
         const list = this.state.members.map((person, index) => {
             const path = '/other/' + person.personId;
             return (
@@ -100,7 +112,7 @@ class Group extends Component {
                     <ul className="group-set-panel hidden"
                         ref={ (set) => { this.setPanel = set; } }
                     >
-                        <li>删除小组</li>
+                        <li onClick={ this.delGroup }>删除小组</li>
                         <li>别的</li>
                     </ul>
                 </nav>

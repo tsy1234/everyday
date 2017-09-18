@@ -113,8 +113,14 @@ router.post('/isingroup', (req, res) => {
             personId,
             personName
         };
+
         res.end(JSON.stringify(result));
     });
+});
+
+router.post('/delgroup', (req, res) => {
+    const groupName = req.body.groupName;
+    back.delGroup(groupName);
 });
 
 module.exports = router;
