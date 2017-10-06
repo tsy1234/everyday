@@ -8,6 +8,7 @@ export const ADD_MY_ACHIEVES = 'ADD_MY_ACHIEVES';
 export const SET_GROUP_PANEL = 'SET_GROUP_PANEL';
 export const ADD_NEW_GROUP = 'ADD_NEW_GROUP';
 export const SET_OPEN = 'SET_OPEN';
+export const DEL_GROUP = 'DEL_GROUP';
 
 export function requestMain () {
     return (dispatch) => {
@@ -75,6 +76,13 @@ function getMyAchieves (myAchieves) {
     return {
         type: GET_MY_ACHIEVES,
         myAchieves: myAchieves
+    };
+}
+
+export function delGroup (groupName) {
+    return {
+        type: DEL_GROUP,
+        groupName: groupName
     };
 }
 

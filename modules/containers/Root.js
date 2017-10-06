@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Achieved from '../components/Achieved';
-import Group from '../components/Group';
+import GetGroup from '../containers/GetGroup';
 
 import GetGroupList from './GetGroupList';
 import GetNav from './GetNav';
@@ -28,7 +28,7 @@ class Root extends Component {
                         <Switch>
                             <Route exact path="/" component={ GetGroupList }/>
                             <Route path="/other/:personId" component={ Achieved }/>
-                            <Route path="/groups/:groupId" component={ Group }/>
+                            <Route path="/groups/:groupId" component={ GetGroup }/>
                         </Switch>                    
                     </div> 
                 </div>

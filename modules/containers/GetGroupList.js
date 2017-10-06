@@ -4,7 +4,7 @@ import { setGroupPanel, addNewGroup } from '../action';
 
 
 var mapStateToProps = (state) => {
-    console.log('mapStateToProps', state.groupsList);
+    console.log('mapState GetGroupList', state.groupsList);
     return {
         groups: state.groupsList,
         panel: state.panel
@@ -12,6 +12,7 @@ var mapStateToProps = (state) => {
 };
 
 var mapDispatchToProps = (dispatch) => {
+    console.log('mapdispatch GetGroupList');
     return {
         openPanel: () => { dispatch(setGroupPanel(true)); },
         closePanel: () => { dispatch(setGroupPanel(false)); },

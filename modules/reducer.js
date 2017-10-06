@@ -2,9 +2,22 @@ import { combineReducers } from 'redux';
 import { 
     REQUEST_GROUPS, RECEIVE_GROUPS,
     GET_MY_ACHIEVES, SET_GROUP_PANEL,
-    ADD_MY_ACHIEVES,
+    ADD_MY_ACHIEVES, DEL_GROUP,
     ADD_NEW_GROUP, SET_OPEN
 } from './action';
+
+function delGroup (state, groupName) {
+    const arr = state.slice();
+    var index;
+    for (var i = 0;i < arr.length;i++) {
+        if (arr[i]['name'] == groupName) {
+            index = i;
+            break;
+        }
+    }
+    arr.splice(index, 1);
+    return arr;
+}
 
 function groupsList (state = [{name: 'front-paap', introduce: 'meiyou'}], action) {
     switch (action.type) {
@@ -12,6 +25,8 @@ function groupsList (state = [{name: 'front-paap', introduce: 'meiyou'}], action
             return action.groups;
         case ADD_NEW_GROUP:
             return [...state, action.newGroup];
+        case DEL_GROUP:
+            return delGroup(state, action.groupName);
         default:
             return state;
     }

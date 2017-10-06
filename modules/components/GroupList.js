@@ -46,9 +46,11 @@ class GroupList extends Component {
     render() {
         const array = this.props.groups;
         const groupList = array.map((group, index) => {
-            const path = '/groups/' + group.name.replace(' ', '_');
+            const path = '/groups/' + group.name;
             return (
-                <Group key={ group.name } name={ group.name } introduce={ group.introduce } path={ path }/>
+                <Group key={ group.name } name={ group.name } 
+                       introduce={ group.introduce } path={ path }
+                />
             );
         });
 

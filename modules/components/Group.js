@@ -18,7 +18,7 @@ class Group extends Component {
     }
 
     addGroup() {
-        const groupName = this.groupName.replace('_', ' ');
+        const groupName = this.groupName;
         var list = this.state.members.slice();
         list.push({ name: this.personName, personId: this.personId });
 
@@ -32,7 +32,7 @@ class Group extends Component {
     }
 
     dropGroup() {
-        const groupName = this.groupName.replace('_', ' ');
+        const groupName = this.groupName;
 
         this.setState({ isIn: false });
 
@@ -44,8 +44,9 @@ class Group extends Component {
     }
 
     delGroup () {
-        const groupName = this.groupName.replace('_', ' ');
+        const groupName = this.groupName;
         axios.post('back/delgroup', { groupName });
+        this.props.delGroup(groupName);
         this.setState({ redirect: true });
     }
 
@@ -59,7 +60,7 @@ class Group extends Component {
             });
 
         axios.post('/back/isingroup', {
-            groupName: groupName.replace('_', ' ')
+            groupName: groupName
         }).then((response) => {
             const data = response.data;
 
