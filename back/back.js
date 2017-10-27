@@ -42,7 +42,7 @@ const Person = mongoose.model('Person', personSchema);
  * @param {Function} fn - callback function  has an param as error
  */
 const checkLogin = (user, fn) => {
-    Person.findOne({personId: user.id}, 'personPass name', (err, person) => {
+    Person.findOne({ personId: user.id }, 'personPass name', (err, person) => {
         if (err) {
             console.log('find person error!!');
             fn(err);
@@ -61,21 +61,32 @@ const checkLogin = (user, fn) => {
  * @param {Object} newP - {name: String, id: String, pass: String}
  * @param {Function} callback
  */
-const createPerson = (newP, callback) => {
-    const person = new Person({
-        name: newP.name,
-        personId: newP.id,
-        personPass: newP.pass
-    });
-
-    person.save((err) => {
+const createPerson = (newP, fn) => {
+    Person.findOne({ personId: newP.id }, (err, p) => {
         if (err) {
-            console.log('create person error!!');
-            callback(err);
+            console.log('find person error');
+            fn(err);
+            return;
         }
-    });
+        if (p) {
+            fn(null, true);
+            return;
+        } 
 
-    callback();
+        const person = new Person({
+            name: newP.name,
+            personId: newP.id,
+            personPass: newP.pass
+        });
+
+        person.save((err) => {
+            if (err) {
+                console.log('create person error!!');
+                fn(err);
+            }
+        });
+        fn();
+    });
 };
 
 /**

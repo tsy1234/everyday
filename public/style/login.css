@@ -8,10 +8,9 @@
     font-size: 32px;
 }
 
-form {
+.form {
     width: 480px;
     margin: 0 auto;
-    text-align: center;
 }
 
 a {
@@ -34,6 +33,7 @@ input {
     padding-left: 32px;
     font-size: 18px;
     border: solid 1px #d9d9d9;
+    transition: border-color .4s ease;
 }
 
 input:focus {
@@ -47,6 +47,19 @@ button {
     background-color: #3DA8F5;
     border: 0;
     cursor: pointer;
+}
+
+.border-red {
+    border-color: #ff4f3e;
+}
+
+.error-block {
+    display: inline-block;
+    padding-bottom: 5px;
+    width: 352px;
+    color: #F74555;
+    font-size: 14px;
+    text-align: left;
 }
 
 .icon-right {
