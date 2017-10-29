@@ -31,11 +31,11 @@ router.post('/register', (req, res) => {
         if (err) {
             res.status(500).send('back end error');
         } else if (exist) {
-            res.redirect('/register');
+            res.end('1');
         } else {
             res.cookie('userId', id);
             res.cookie('userName', name);
-            res.redirect('/index');
+            res.end('0');
         }
     });
 });
