@@ -20,7 +20,8 @@ class Achieved extends Component {
     }
 
     render() {
-        const lists = this.state.achieves.map((item, index) => (
+        const rev = this.state.achieves.slice().reverse();
+        const lists = rev.map((item, index) => (
             <div key={ index } className="time-line">
 			    <span className="time-ill">{ item.date }</span>
 			    <p>{ item.content }</p>

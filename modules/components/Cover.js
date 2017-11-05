@@ -49,7 +49,8 @@ class Cover extends Component {
     }
 
     render() {
-        const lists = this.props.myAchieves.map((item, index) => (
+        const rev = this.props.myAchieves.slice().reverse();
+        const lists = rev.map((item, index) => (
             <div key={ index } className="time-line">
 			    <span className="time-ill">{ item.date }</span>
 			    <p>{ item.content }</p>

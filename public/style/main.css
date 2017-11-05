@@ -311,7 +311,8 @@ nav ul .nav-tag:last-child {
     font-size: 18px;
 }
 
-#new-group > span:first-child {
+#new-group > i {
+    display: block;
     padding-bottom: 14px;
     font-size: 40px;
 }

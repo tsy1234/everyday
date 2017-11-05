@@ -107,8 +107,8 @@ class Group extends Component {
                 <nav className="group-nav">
                     <span>小组成员</span>
                     { this.state.isIn ? isIn : join }
-                    <span className="icon-cog group-set"
-                          onClick={ this.toggleSet }
+                    <i className="fa fa-cog group-set" aria-hidden="true"
+                       onClick={ this.toggleSet }
                     />
                     <ul className="group-set-panel hidden"
                         ref={ (set) => { this.setPanel = set; } }

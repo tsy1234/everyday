@@ -79,7 +79,7 @@ class GroupList extends Component {
                 <p>已创立的小组</p>
                 { groupList }
                 <div id="new-group" onClick={ this.props.openPanel }>
-                    <span className="icon-plus-sign"/>
+                <i className="fa fa-plus-circle" aria-hidden="true"></i>
                     <span>创建新小组</span>
                 </div>
                 { this.props.panel ? cover : null }
