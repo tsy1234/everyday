@@ -4,7 +4,8 @@ module.exports = {
   entry: __dirname + '/src/app.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/public/'
   },
   module: {
     loaders: [
@@ -26,5 +27,10 @@ module.exports = {
         loader: 'style-loader!css-loader!less-loader'
       }
     ]
-  }
+  },
+  devServer: {
+    proxy: {
+      '/back': 'http://localhost:3000'
+    }
+  },
 };

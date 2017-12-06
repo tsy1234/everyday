@@ -1,9 +1,5 @@
-const mainDir = __dirname;
+const eveConfig = {
+    backPort: 'localhost:3001'
+}
 
-console.log(module.paths);
-const setName = function () {
-    console.log('hehe');
-};
-
-setName();
-exports.setName = setName;
+export default eveConfig

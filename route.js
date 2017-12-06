@@ -3,6 +3,14 @@ const router = express.Router();
 
 const back = require('./back/back');
 
+router.get('/checkCookies', (req, res) => {
+    if (req.cookies.userId != undefined && req.cookies.userName != undefined) {
+        res.send('1');
+    } else {
+        res.send('0');
+    }
+});
+
 router.post('/checklogin', (req, res) => {
     var o = {
         id: req.body.id,

@@ -13,14 +13,14 @@
     margin: 0 auto;
 }
 
-a {
+.form a {
     display: block;
     text-decoration: none;
     color: inherit;
 }
 
-input,
-button {
+.form input,
+.form button {
     display: inline-block;
     width: 320px;
     height: 45px;
@@ -29,18 +29,18 @@ button {
     outline: 0;
 }
 
-input {
+.form input {
     padding-left: 32px;
     font-size: 18px;
     border: solid 1px #d9d9d9;
     transition: border-color .4s ease;
 }
 
-input:focus {
+.form input:focus {
     border-color: #a6a6a6;
 }
 
-button {
+.form button {
     width: 352px;
     font-size: 18px;
     color: #fff;
@@ -49,11 +49,11 @@ button {
     cursor: pointer;
 }
 
-.border-red {
+.form .border-red {
     border-color: #ff4f3e;
 }
 
-.error-block {
+.form .error-block {
     display: inline-block;
     padding-bottom: 5px;
     width: 352px;
