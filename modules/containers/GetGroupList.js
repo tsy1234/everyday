@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import GroupList from '../components/GroupList';
-import { setGroupPanel, addNewGroup } from '../action';
+import { setGroupPanel, addNewGroup, requestMain } from '../action';
 
 
 var mapStateToProps = (state) => {
@@ -16,7 +16,8 @@ var mapDispatchToProps = (dispatch) => {
     return {
         openPanel: () => { dispatch(setGroupPanel(true)); },
         closePanel: () => { dispatch(setGroupPanel(false)); },
-        addNewGroup: (obj) => { dispatch(addNewGroup(obj)); }
+        addNewGroup: (obj) => { dispatch(addNewGroup(obj)); },
+        renderGroupLists: () => { dispatch(requestMain()); }
     };
 };
 

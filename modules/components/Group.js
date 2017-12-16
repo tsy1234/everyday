@@ -51,6 +51,7 @@ class Group extends Component {
     }
 
     componentWillMount() {
+        console.log('where is my group');
         const groupName = this.props.match.params.groupId;
         this.groupName = groupName;
 

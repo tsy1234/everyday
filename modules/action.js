@@ -12,7 +12,7 @@ export const DEL_GROUP = 'DEL_GROUP';
 
 export function requestMain () {
     return (dispatch) => {
-        console.log('requsetMain');
+        console.log('request groups');
         dispatch(requestGroups());    
     };
 }
@@ -21,7 +21,7 @@ function requestGroups () {
     return function (dispatch) {
         return axios.get('/back/getgroups')
             .then((response) => {
-                console.log('requestGroups', response.data);
+                console.log('requestGroupsover', response.data);
                 dispatch(receiveGroups(response.data));
             });
     };

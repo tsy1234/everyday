@@ -43,6 +43,10 @@ class GroupList extends Component {
         }, 500);
     }
 
+    componentDidMount() {
+        this.props.renderGroupLists();
+    }
+
     render() {
         const array = this.props.groups;
         const groupList = array.map((group, index) => {

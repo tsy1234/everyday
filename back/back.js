@@ -129,6 +129,7 @@ const getGroups = (fn) => {
  */
 const getMembers = (groupName, callback) => {
     Group.findOne({name: groupName}, 'members', (err, group) => {
+        console.log(groupName);
         if (err) {
             console.log('get group error');
         } else {

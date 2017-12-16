@@ -13,10 +13,6 @@ class RegisterPanel extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    ComponentDidMount() {
-        console.log('register did mount');
-    }
-
     handleFocus() {
         this.setState({
             error: false
