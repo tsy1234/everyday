@@ -59,7 +59,7 @@ const checkLogin = (user, fn) => {
 /**
  * 
  * @param {Object} newP - {name: String, id: String, pass: String}
- * @param {Function} callback
+ * @param {Function} fn
  */
 const createPerson = (newP, fn) => {
     Person.findOne({ personId: newP.id }, (err, p) => {
@@ -171,7 +171,7 @@ const insertMember = (groupName, person) => {
 /**
  * 
  * @param {String} groupName - the name of group to mutate
- * @param {String} person - the id of dropped person
+ * @param {String} personId - the id of dropped person
  */
 const dropMember = (groupName, personId) => {
     Group.update({name: groupName}, {$pull: {members: {personId: personId}}}, (err, raw) => {
@@ -187,7 +187,7 @@ const dropMember = (groupName, personId) => {
  * @param {object} newA - {content: String, date: String (maybe Date)}
  */
 const insertAchieved = (personId, newA) => {
-    Person.update({personId: personId}, {$push: {achieved: newA}}, (err, raw) => {
+    Person.update({personId: personId}, {$push: {achieved: newA}}, (err) => {
         if (err) {
             console.log('insert achieved error');
         } 

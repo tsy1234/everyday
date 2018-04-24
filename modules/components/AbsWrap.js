@@ -30,7 +30,7 @@ class AbsWrap extends Component {
                 <GetNav/>
                 <div id="abs-wrap">
                 <InputChild match={ match } />
-                </div> 
+                </div>
             </div>
         );
     }
